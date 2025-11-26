@@ -1,0 +1,1431 @@
+[{
+  "_id": "movie:1",
+  "title": "Vertigo",
+  "year": 1958,
+  "genre": "drama",
+  "summary": "Scottie Ferguson, ancien inspecteur de police, est sujet au vertige depuis qu'il a vu mourir son collÃ¨gue. Elster, son ami, le charge de surveiller sa femme, Madeleine, ayant des tendances suicidaires. Amoureux de la jeune femme Scottie ne remarque pas le piÃ¨ge qui se trame autour de lui et dont il va Ãªtre la victime... ",
+  "country": "DE",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": [
+    {
+      "_id": "person:15",
+      "role": "John Ferguson"
+    },
+    {
+      "_id": "person:16",
+      "role": "Madeleine Elster"
+    }
+  ]
+},
+{
+  "_id": "movie:2",
+  "title": "Alien",
+  "year": 1979,
+  "genre": "Science-fiction",
+  "summary": "PrÃ¨s d'un vaisseau spatial Ã©chouÃ© sur une lointaine planÃ¨te, des Terriens en mission dÃ©couvrent de bien Ã©tranges \"oeufs\". Ils en ramÃ¨nent un Ã  bord, ignorant qu'ils viennent d'introduire parmi eux un huitiÃ¨me passager particuliÃ¨rement fÃ©roce et meurtrier. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:4"
+  },
+  "actors": [
+    {
+      "_id": "person:5",
+      "role": "Ripley"
+    }
+  ]
+},
+{
+  "_id": "movie:3",
+  "title": "Titanic",
+  "year": 1997,
+  "genre": "drama",
+  "summary": "Conduite par Brock Lovett, une expÃ©dition amÃ©ricaine fouillant l'Ã©pave du Titanic remonte Ã  la surface le croquis d'une femme nue. AlertÃ©e par les mÃ©dias la dame en question, Rose DeWitt Bukater, aujourd'hui centenaire, rejoint les lieux du naufrage, d'oÃ¹ elle entreprend de conter le rÃ©cit de son fascinant, Ã©trange et tragique voyage... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:6"
+  },
+  "actors": [
+    {
+      "_id": "person:109",
+      "role": "Rose DeWitt Bukater"
+    },
+    {
+      "_id": "person:110",
+      "role": "Jack Dawson"
+    }
+  ]
+},
+{
+  "_id": "movie:4",
+  "title": "FenÃªtre sur cour",
+  "year": 1954,
+  "genre": "Suspense",
+  "summary": "En repos forcÃ© Ã  cause d'une jambe plÃ¢trÃ©e, le reporter L.B. Jefferies observe au tÃ©lÃ©objectif les voisins de l'immeuble d'en face. C'est ainsi qu'il remarque le curieux manÃ¨ge d'un reprÃ©sentant de commerce, M. Thorwald, qu'il soupconne trÃ¨s vite d'avoir assassinÃ© sa femme... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": []
+},
+{
+  "_id": "movie:5",
+  "title": "Volte/Face",
+  "year": 1997,
+  "genre": "Action",
+  "summary": "Directeur d'une unitÃ© anti-terroriste, Sean Archer recherche Castor Troy, un criminel responsable de la mort de son fils six ans plus tÃ´t. Il parvient Ã  l'arrÃªter mais apprend que Troy a cachÃ© une bombe au Palais des CongrÃ¨s de Los Angeles. Seul le frÃ¨re de Troy peut la dÃ©samorcer et, pour l'approcher, Archer se fait greffer le visage de Troy. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:10"
+  },
+  "actors": [
+    {
+      "_id": "person:11",
+      "role": "Sean Archer/Castor Troy"
+    },
+    {
+      "_id": "person:12",
+      "role": "Castor Troy/Sean Archer"
+    }
+  ]
+},
+{
+  "_id": "movie:6",
+  "title": "Sleepy Hollow",
+  "year": 1999,
+  "genre": "Fantastique",
+  "summary": "Nouvelle Angleterre, 1799. A Sleepy Hollow, plusieurs cadavres sont retrouvÃ©s dÃ©capitÃ©s. La                                      rumeur attribue ces meurtres Ã  un cavalier lui-mÃªme sans tÃªte. Mais le fin limier                                      new-yorkais Ichabod Crane ne croit pas en ses aberrations. TombÃ© sous le charme de la                                      vÃ©nÃ©neuse Katrina, il mÃ¨ne son enquÃªte au coeur des sortilÃ¨ges de Sleepy Hollow.. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:13"
+  },
+  "actors": [
+    {
+      "_id": "person:14",
+      "role": "Constable Ichabod Crane"
+    },
+    {
+      "_id": "person:96",
+      "role": "Katrina Anne Van Tassel"
+    },
+    {
+      "_id": "person:97",
+      "role": "Le cavalier"
+    }
+  ]
+},
+{
+  "_id": "movie:7",
+  "title": "American Beauty",
+  "year": 1999,
+  "genre": "ComÃ©die",
+  "summary": "Lester Burnham, sa femme Carolyn et leur fille Jane mÃ¨nent apparemment une vie des plus heureuses dans leur belle banlieue. Mais derriÃ¨re cette respectable faÃ§ade se tisse une Ã©trange et grinÃ§ante tragi-comÃ©die familiale oÃ¹ dÃ©sirs inavouÃ©s, frustrations et violences refoulÃ©es conduiront inexorablement un homme vers la mort. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:17"
+  },
+  "actors": [
+    {
+      "_id": "person:18",
+      "role": "Lester Burnham"
+    },
+    {
+      "_id": "person:19",
+      "role": "Carolyn Burnham"
+    }
+  ]
+},
+{
+  "_id": "movie:8",
+  "title": "Impitoyable",
+  "year": 1992,
+  "genre": "Western",
+  "summary": "LÃ©gendaire hors-la-loi, William Munny s'est reconverti depuis onze ans en paisible fermier. Il reprend nÃ©anmoins les armes pour traquer deux tueurs en compagnie de son vieil ami Ned Logan. Mais ce dernier est capturÃ©, puis Ã©xÃ©cute. L'honneur et l'amitiÃ© imposent dÃ¨s lors Ã  Munny de redevenir une derniÃ¨re fois le hÃ©ros qu'il fut jadis... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:20"
+  },
+  "actors": [
+    {
+      "_id": "person:20",
+      "role": "William Munny"
+    },
+    {
+      "_id": "person:21",
+      "role": "Little Bill Dagget"
+    },
+    {
+      "_id": "person:22",
+      "role": "Ned Logan"
+    }
+  ]
+},
+{
+  "_id": "movie:9",
+  "title": "Gladiator",
+  "year": 2000,
+  "genre": "drama",
+  "summary": "Le gÃ©nÃ©ral romain Maximus est le plus fidÃ¨le                    soutien de l'empereur Marc AurÃ¨le, qu'il a                    conduit de victoire en victoire avec une                    bravoure et un dÃ©vouement exemplaires.                    Jaloux du prestige de Maximus, et plus                    encore de l'amour que lui voue l'empereur,                    le fils de Marc-AurÃ¨le, Commode, s'arroge                    brutalement le pouvoir, puis ordonne                    l'arrestation du gÃ©nÃ©ral et son exÃ©cution.                    Maximus Ã©chappe Ã  ses assassins mais ne peut                    empÃªcher le massacre de sa famille. CapturÃ©                    par un marchand d'esclaves, il devient                    gladiateur et prÃ©pare sa vengeance.",
+  "country": "USA",
+  "director": {
+    "_id": "person:4"
+  },
+  "actors": [
+    {
+      "_id": "person:23",
+      "role": "Maximus"
+    },
+    {
+      "_id": "person:147",
+      "role": "Commode"
+    },
+    {
+      "_id": "person:148",
+      "role": "Lucilla"
+    },
+    {
+      "_id": "person:149",
+      "role": "Marc Aurele"
+    }
+  ]
+},
+{
+  "_id": "movie:10",
+  "title": "Blade Runner",
+  "year": 1982,
+  "genre": "Action",
+  "summary": "En 2019, lors de la dÃ©cadence de Los Angeles, des Ãªtres synthÃ©tiques, sans pensÃ©e, sans Ã©motions, suffisent aux diffÃ©rents travaux d'entretien. Leur durÃ©e de vie n'excÃ¨de pas 4 annÃ©es. Un jour, ces ombres humaines se rÃ©voltent et on charge les tueurs, appelÃ©s Blade Runner, de les abattre... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:4"
+  },
+  "actors": [
+    {
+      "_id": "person:24",
+      "role": "Deckard"
+    },
+    {
+      "_id": "person:25",
+      "role": "Batty"
+    }
+  ]
+},
+{
+  "_id": "movie:11",
+  "title": "PiÃ¨ge de cristal",
+  "year": 1988,
+  "genre": "Action",
+  "summary": "John Mc Clane, policier new-yorkais, vient passer Noel a Los Angeles aupres de sa femme. Dans le building ou elle travaille, il se retrouve temoin de la prise en otage de tout le personnel par 12 terroristes. Objectif de ces derniers, vider les coffres de la societe. Cache mais isole, il entreprend de prevenir l'exterieur...",
+  "country": "USA",
+  "director": {
+    "_id": "person:26"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "McClane"
+    }
+  ]
+},
+{
+  "_id": "movie:12",
+  "title": "58 minutes pour vivre",
+  "year": 1990,
+  "genre": "Action",
+  "summary": " Venu attendre sa femme a l'aÃ©roport, le policier John McClane remarque la prÃ©sence de terroristes qui ont pris le contrÃ´le des pistes, empÃªchant tout avion d'atterrir et menaÃ§ant de laisser les appareils en vol tourner jusqu'Ã  Ã©puisement de leur kÃ©rosÃ¨ne. John n'a devant lui que 58 minutes pour Ã©viter la catastrophe... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:28"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "McClane"
+    }
+  ]
+},
+{
+  "_id": "movie:13",
+  "title": "Van Gogh",
+  "year": 1990,
+  "genre": "drama",
+  "summary": "Les derniers jours de la vie de Vincent Van Gogh, rÃ©fugiÃ© Ã  Auvers-sur-Oise, prÃ¨s de chez son ami et protecteur le docteur Gachet, un ami de son frÃ¨re ThÃ©o. Ce peintre maudit, que les villageois surlast_namemaient \"le fou\", n'avait alors plus que deux mois Ã  vivre, qu'il passa en peignant un tableau par jour. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:29"
+  },
+  "actors": [
+    {
+      "_id": "person:30",
+      "role": "Van Gogh"
+    }
+  ]
+},
+{
+  "_id": "movie:14",
+  "title": "Seven",
+  "year": 1995,
+  "genre": "crime",
+  "summary": "A New York, un criminel anonyme a dÃ©cidÃ© de commettre 7 meurtres basÃ©s sur les 7 pÃªchÃ©s capitaux Ã©noncÃ©s dans la Bible : gourmandise, avarice, paresse, orgueil, luxure, envie et colÃ¨re. Vieux flic blasÃ© Ã  7 jours de la retraite, l'inspecteur Somerset mÃ¨ne l'enquÃªte tout en formant son remplaÃ§ant, l'ambitieux inspecteur David Mills... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:31"
+  },
+  "actors": [
+    {
+      "_id": "person:18",
+      "role": "Doe"
+    },
+    {
+      "_id": "person:22",
+      "role": "Somerset"
+    },
+    {
+      "_id": "person:32",
+      "role": "Mills"
+    }
+  ]
+},
+{
+  "_id": "movie:15",
+  "title": "Twelve Monkeys",
+  "year": 1995,
+  "genre": "Science-fiction",
+  "country": "USA",
+  "director": {
+    "_id": "person:33"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "Cole"
+    }
+  ]
+},
+{
+  "_id": "movie:16",
+  "title": "Le last_name de la rose",
+  "year": 1986,
+  "genre": "crime",
+  "summary": "En l'an 1327, dans une abbaye bÃ©nÃ©dictine, le moine franciscain Guillaume de Baskerville, accompagnÃ© de son jeune novice Adso, enquÃªte sur de mystÃ©rieuses morts qui frappent la confrÃ©rie. Le secret semble rÃ©sider dans la bibliothÃ¨que, oÃ¹ le vieux Jorge garde jalousement un livre jugÃ© maudit. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:34"
+  },
+  "actors": [
+    {
+      "_id": "person:35",
+      "role": "Baskerville"
+    },
+    {
+      "_id": "person:36",
+      "role": "de Melk"
+    }
+  ]
+},
+{
+  "_id": "movie:17",
+  "title": "Pulp fiction",
+  "year": 1994,
+  "genre": "Action",
+  "summary": "Pulp Fiction dÃ©crit l'odyssÃ©e sanglante et burlesque de petits malfrats dans la jungle de Hollywood, ou s'entrecroisent les destins de deux petits tueurs, d'un dangereux gangster mariÃ© Ã  une camÃ©e, d'un boxeur roublard, de prÃªteurs sur gages sadiques, d'un caÃ¯d Ã©lÃ©gant et dÃ©vouÃ©, d'un dealer bon mari et de deux tourtereaux Ã  la gachette facile... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:37"
+  },
+  "actors": [
+    {
+      "_id": "person:11",
+      "role": "Vincent Vega"
+    },
+    {
+      "_id": "person:27",
+      "role": "Butch Coolidge"
+    },
+    {
+      "_id": "person:37",
+      "role": "Jimmy Dimmick"
+    },
+    {
+      "_id": "person:38",
+      "role": "Jules Winnfield"
+    },
+    {
+      "_id": "person:39",
+      "role": "Jody"
+    },
+    {
+      "_id": "person:40",
+      "role": "Mia Wallace"
+    }
+  ]
+},
+{
+  "_id": "movie:18",
+  "title": "Mary Ã  tout prix",
+  "year": 1998,
+  "genre": "ComÃ©die",
+  "summary": "Pour retrouver l'amour de sa jeunesse, la belle Mary, Ted-le-looser engage Pat Healy, un privÃ©. SubjugÃ© par la jeune femme, ce dernier tente de la sÃ©duire en se faisant passer pour un architecte. Il cache la vÃ©ritÃ© Ã  Ted et fait cause commune avec Tucker, un autre prÃ©tendant, pour se dÃ©barrasser de l'encombrant Ted... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:41"
+  },
+  "actors": [
+    {
+      "_id": "person:42",
+      "role": "Mary Jensen Matthews"
+    },
+    {
+      "_id": "person:43",
+      "role": "Pat Healy"
+    }
+  ]
+},
+{
+  "_id": "movie:19",
+  "title": "Terminator",
+  "year": 1984,
+  "genre": "Science-fiction",
+  "summary": "Deux creatures venues du futur debarquent sur terre. L'une d'entre elles, le Terminator, doit eliminer une certaine Sarah Connor, qui doit enfanter celui qui sera le chef d'un groupe de resistants. L'autre, Kyle Reese, est charge par les rebelles de defendre Sarah... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:6"
+  },
+  "actors": [
+    {
+      "_id": "person:44",
+      "role": "Terminator"
+    }
+  ]
+},
+{
+  "_id": "movie:20",
+  "title": "Les dents de la mer",
+  "year": 1975,
+  "genre": "Horreur",
+  "summary": "Dans la station balnÃ©aire d'Amityville, un requin gÃ©ant frappe Ã  plusieurs reprises. Soucieux d'une bonne saison touristique, le maire interdit au sherif Brody de fermer les plages. Une prime est offerte et le cÃ©lÃ¨bre chasseur de requin Quint se lance avec Brody et l'ichtyologue Hooper Ã  la poursuite du monstre... ",
+  "country": "FR",
+  "director": {
+    "_id": "person:45"
+  },
+  "actors": [
+    {
+      "_id": "person:46",
+      "role": "Martin Brody"
+    },
+    {
+      "_id": "person:47",
+      "role": "Quint"
+    },
+    {
+      "_id": "person:48",
+      "role": "Matt Hooper"
+    }
+  ]
+},
+{
+  "_id": "movie:21",
+  "title": "Le silence des agneaux",
+  "year": 1990,
+  "genre": "crime",
+  "summary": "Afin de retrouver la piste d'un tueur surlast_namemÃ© Buffalo Bill car il scalpe les femmes qu'il assassine, la jeune stagiaire du FBI Clarice Starling est dÃ©pÃªchÃ©e auprÃ¨s d'Hannibal Lecter, prisonnier pour avoir dÃ©vorÃ© ses victimes. La coopÃ©ration de ce dernier devrait permettre Ã  Clarice de saisir et d'anticiper le comportement de Buffalo... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:49"
+  },
+  "actors": [
+    {
+      "_id": "person:50",
+      "role": "Dr. Hannibal Lecter"
+    },
+    {
+      "_id": "person:51",
+      "role": "Clarice Starling"
+    }
+  ]
+},
+{
+  "_id": "movie:22",
+  "title": "Godzilla",
+  "year": 1998,
+  "genre": "Action",
+  "summary": "Issu des radiations atomiques engendrÃ©es par les essais nuclÃ©aires en PolynÃ©sie, un monstre gigantesque, aussi haut qu'un building, se dirige vers New York, semant le chaos sur son passage. Pour tenter de stopper cette crÃ©ature destructrice, l'armÃ©e s'associe Ã  une Ã©quipe de scientifiques amÃ©ricains et Ã  un Ã©nigmatique enquÃªteur franÃ§ais... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:58"
+  },
+  "actors": [
+    {
+      "_id": "person:59",
+      "role": "Dr. Nikos Tatopoulos"
+    },
+    {
+      "_id": "person:60",
+      "role": "Philippe RoachÃ©"
+    }
+  ]
+},
+{
+  "_id": "movie:23",
+  "title": "Matrix",
+  "year": 1999,
+  "genre": "Science-fiction",
+  "summary": "Dans un monde oÃ¹ tout ce qui semble rÃ©el est en fait Ã©laborÃ© par l'univers Ã©lectronique baptisÃ© la Matrice, NÃ©o, un programmeur, est contactÃ© par un certain Morpheus. D'aprÃ¨s lui, NÃ©o serait le LibÃ©rateur tant attendu, le seul capable de mettre en Ã©chec l'omnipotence de la Matrice et rendre ses droits Ã  la rÃ©alitÃ©... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:61"
+  },
+  "actors": [
+    {
+      "_id": "person:62",
+      "role": "Neo"
+    },
+    {
+      "_id": "person:63",
+      "role": "Morpheus"
+    }
+  ]
+},
+{
+  "_id": "movie:24",
+  "title": "Mission: Impossible",
+  "year": 1996,
+  "genre": "Action",
+  "summary": "ChargÃ© d'une nouvelle mission, l'agent du contre espionnage Ethan Hunt tombe avec son Ã©quipe dans un piÃ¨ge sanglant. Seul survivant avec Claire, la jeune Ã©pouse de son regrettÃ© chef Jim Phelps, Ethan se retrouve accusÃ© de trahison. En fuite, il prÃ©pare sa contre-attaque, recrutant l'homme de main Krieger et le pirate informatique Luther... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:64"
+  },
+  "actors": [
+    {
+      "_id": "person:60",
+      "role": "Franz Krieger"
+    },
+    {
+      "_id": "person:65",
+      "role": "Ethan Hunt"
+    },
+    {
+      "_id": "person:66",
+      "role": "Jim Phelps"
+    },
+    {
+      "_id": "person:67",
+      "role": "Claire Phelps"
+    }
+  ]
+},
+{
+  "_id": "movie:25",
+  "title": "Nous trois ou rien",
+  "year": 2015,
+  "genre": "drama",
+  "summary": "Dâ€™un petit village du sud de lâ€™Iran aux citÃ©s parisiennes, Kheiron nous raconte le destin hors du commun de ses parents Hibat et Fereshteh, Ã©ternels optimistes, dans une comÃ©die aux airs de conte universel qui Ã©voque lâ€™amour familial, le don de soi et surtout lâ€™idÃ©al dâ€™un vivre-ensemble. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:281"
+  },
+  "actors": []
+},
+{
+  "_id": "movie:26",
+  "title": "Les pleins pouvoirs",
+  "year": 1997,
+  "genre": "crime",
+  "summary": "Luther Whitney est l'as des cambrioleurs. OccupÃ© Ã  vider le coffre de l'influent Walter Sullivan, il est tÃ©moin d'un meurtre sadique impliquant le PrÃ©sident des Etats-Unis et les services secrets. SoupÃ§onnÃ© par la police d'en Ãªtre l'auteur, il se retrouve Ã©galement traquÃ© par les tueurs, qui ont compris qu'ils ont Ã©tÃ© observÃ©s.",
+  "country": "USA",
+  "director": {
+    "_id": "person:20"
+  },
+  "actors": [
+    {
+      "_id": "person:20",
+      "role": "Luther Whitney"
+    },
+    {
+      "_id": "person:21",
+      "role": "Le prÃ©sident Richmond"
+    },
+    {
+      "_id": "person:69",
+      "role": "Seth Frank"
+    }
+  ]
+},
+{
+  "_id": "movie:27",
+  "title": "Le gendarme et les extra-terrestres",
+  "year": 1978,
+  "genre": "ComÃ©die",
+  "summary": "En anglais: Gendarme and the Creatures from Outer Space !",
+  "country": "FR",
+  "director": {
+    "_id": "person:71"
+  },
+  "actors": [
+    {
+      "_id": "person:72",
+      "role": "Inspecteur Cruchot"
+    },
+    {
+      "_id": "person:73",
+      "role": "Adjudant Gerber"
+    }
+  ]
+},
+{
+  "_id": "movie:28",
+  "title": "Le monde perdu",
+  "year": 1997,
+  "genre": "Horreur",
+  "country": "USA",
+  "director": {
+    "_id": "person:45"
+  },
+  "actors": [
+    {
+      "_id": "person:57",
+      "role": "Dr. Ian Malcolm"
+    }
+  ]
+},
+{
+  "_id": "movie:29",
+  "title": "Rain Man",
+  "year": 1988,
+  "genre": "drama",
+  "summary": "A la mort de son pÃ¨re, Charlie se voit dÃ©possÃ©der de son hÃ©ritage par un frÃ¨re dont il ignorait l'existence, Raymond. Celui-ci est autiste et vit dans un hÃ´pital psychiatrique. Charlie enlÃ¨ve Raymond afin de prouver qu'il est capable de s'en occuper et de toucher l'hÃ©ritage. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:79"
+  },
+  "actors": [
+    {
+      "_id": "person:65",
+      "role": "Charlie Babbitt"
+    },
+    {
+      "_id": "person:80",
+      "role": "Raymond Babbitt"
+    }
+  ]
+},
+{
+  "_id": "movie:30",
+  "title": "Top Gun",
+  "year": 1986,
+  "genre": "Action",
+  "summary": " Pilote de chasse Ã©mÃ©rite mais casse-cou Maverick Mitchell est admis Ã  Top Gun, l'Ã©cole de l'Ã©lite de l'aÃ©ronavale. Son manque de prudence lui attire les foudres de ses supÃ©rieurs et la haine de certains coÃ©quipiers. Il perd subitement la foi et confiance en lui quand son ami de toujours meurt en vol et qu'il s'en croit responsable... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:81"
+  },
+  "actors": [
+    {
+      "_id": "person:53",
+      "role": "Iceman"
+    },
+    {
+      "_id": "person:65",
+      "role": "Lt. Pete Maverick Mitchell"
+    },
+    {
+      "_id": "person:82",
+      "role": "Charlotte Blackwood"
+    }
+  ]
+},
+{
+  "_id": "movie:31",
+  "title": "Les bronzÃ©s font du ski",
+  "year": 1979,
+  "genre": "ComÃ©die",
+  "summary": "Apres avoir passe des vacances d'ete ensemble, Bernard, Nathalie, Gigi, Jerome, Popeye, Jean-Claude et Christiane se retrouvent aux sports d'hiver. Tous ont leurs problemes de coeur ou d'argent, mais il faut bien vivre avec. Avant de se separer, se perdre dans la montagne leur permet de gouter aux joies de la \"vraie vie\" paysanne... ",
+  "country": "FR",
+  "director": {
+    "_id": "person:83"
+  },
+  "actors": [
+    {
+      "_id": "person:75",
+      "role": "Nathalie Morin"
+    },
+    {
+      "_id": "person:76",
+      "role": "Christiane"
+    },
+    {
+      "_id": "person:84",
+      "role": "Jean-Claude Dus"
+    },
+    {
+      "_id": "person:85",
+      "role": "JÃ©rÃ´me"
+    },
+    {
+      "_id": "person:86",
+      "role": "Popeye"
+    }
+  ]
+},
+{
+  "_id": "movie:32",
+  "title": "Le bon, la brute et le truand",
+  "year": 1966,
+  "genre": "Western",
+  "summary": "Pendant la Guerre de SÃ©cession, trois hommes, prÃ©fÃ©rant s'intÃ©resser Ã  leur profit personnel, se lancent Ã  la recherche d'un coffre contenant 200 000 dollars en piÃ¨ces d'or volÃ©s Ã  l'armÃ©e sudiste. Tuco sait que le trÃ©sor se trouve dans un cimetiÃ¨re, tandis que Joe connaÃ®t le last_name inscrit sur la pierre tombale qui sert de cache. Chacun a besoin de l'autre. Mais un troisiÃ¨me homme entre dans la course : Setenza, une brute qui n'hÃ©site pas Ã  massacrer femmes et enfants pour parvenir Ã  ses fins.",
+  "country": "IT",
+  "director": {
+    "_id": "person:219"
+  }
+},
+{
+  "_id": "movie:33",
+  "title": "Psychose",
+  "year": 1960,
+  "genre": "Thriller",
+  "summary": "AprÃ¨s avoir volÃ© 40 000 dollars, Marion Crane se rend dans un motel tenu par Norman Bates. Elle est poignardÃ©e sous sa douche par une femme. Norman fait disparaitre le corps et les affaires de la jeune femme. Mais Sam, le fiancÃ© de Marion, inquiet de ne pas avoir de nouvelles, engage un dÃ©tective pour la retrouver... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": [
+    {
+      "_id": "person:88",
+      "role": "Bates"
+    },
+    {
+      "_id": "person:89",
+      "role": "Lila Crane"
+    },
+    {
+      "_id": "person:90",
+      "role": "Marion Crane"
+    }
+  ]
+},
+{
+  "_id": "movie:34",
+  "title": "Le retour du Jedi",
+  "year": 1983,
+  "genre": "Science-fiction",
+  "summary": "Luke Skywalker s'introduit chez Jabba pour delivrer Han Solo et la princesse Leia, tandis que l'Empire reconstruit une deuxieme \"Etoile de la Mort\". Luke se rend ensuite au chevet de Yoda qui est mourant. Il lui apprend que Leia est sa soeur. Luke forme un commando pour attaquer l'Etoile, tandis qu'il affronte son pere, Darth Vador... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:91"
+  },
+  "actors": [
+    {
+      "_id": "person:24",
+      "role": "Han Solo"
+    },
+    {
+      "_id": "person:92",
+      "role": "Luke Skywalker"
+    },
+    {
+      "_id": "person:93",
+      "role": "Princesse Leia"
+    }
+  ]
+},
+{
+  "_id": "movie:35",
+  "title": "Les oiseaux",
+  "year": 1963,
+  "genre": "Horreur",
+  "summary": "Melanie Daniels se rend Ã  Bodega Bay pour offrir deux perruches en cage Ã  Cathy, la soeur de l'avocat Mitch Brenner. AttaquÃ©e par une mouette, Melanie reste chez les Brenner pour la nuit. Mais d'autres Ã©vÃ¨nements Ã©tranges se produisent: des enfants sont blessÃ©s par des corbeaux et la maison de Mitch est envahie par des milliers d'oiseaux. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": [
+    {
+      "_id": "person:94",
+      "role": "Mitch Brenner"
+    },
+    {
+      "_id": "person:95",
+      "role": "Melanie Daniels"
+    }
+  ]
+},
+{
+  "_id": "movie:36",
+  "title": "Reservoir dogs",
+  "year": 1992,
+  "genre": "crime",
+  "summary": "AprÃ¨s un hold-up manquÃ©, des cambrioleurs de haut vol font leurs comptes dans une confrontation violente, pour dÃ©couvrir lequel d'entre eux les a trahis. Voleurs de profession, Joe Cabot et son fils Eddie engagent un groupe de six criminels pour le cambriolage d'un diamantaire. MalgrÃ© toutes les prÃ©cautions prises, la police est sur place le jour J, et l'opÃ©ration se solde par un massacre. Les survivants du gang se rÃ©unissent pour rÃ¨gler leurs comptes, chacun soupÃ§onnant l'autre d'avoir trahi. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:37"
+  },
+  "actors": [
+    {
+      "_id": "person:37",
+      "role": "Mr. Brown"
+    },
+    {
+      "_id": "person:98",
+      "role": "Mr. White/Larry"
+    },
+    {
+      "_id": "person:99",
+      "role": "Freddy Newendyke/Mr. Orange"
+    },
+    {
+      "_id": "person:100",
+      "role": "Nice Guy Eddie"
+    },
+    {
+      "_id": "person:215",
+      "role": "Mr Blonde"
+    },
+    {
+      "_id": "person:217",
+      "role": "Mr Pink"
+    }
+  ]
+},
+{
+  "_id": "movie:37",
+  "title": "Eyes Wide Shut",
+  "year": 1999,
+  "genre": "Thriller",
+  "summary": "Un couple de bourgeois, cÃ©dant Ã  la jalousie et Ã  l'obsession sexuelle, entreprend un voyage psychologique Ã  la recherche de son identitÃ©. Le mari, au bout de son pÃ©riple nocturne, revenu de ses dÃ©sirs, ne trouvera finalement auprÃ¨s de son Ã©pouse qu'un compromis banal mais complice, les yeux ouverts Ã  tout jamais sur un rÃªve impossible. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:101"
+  },
+  "actors": [
+    {
+      "_id": "person:65",
+      "role": "Docteur William \"Bill\" Harford"
+    },
+    {
+      "_id": "person:102",
+      "role": "Alice Harford"
+    }
+  ]
+},
+{
+  "_id": "movie:38",
+  "title": "Shining",
+  "year": 1980,
+  "genre": "Horreur",
+  "summary": "Jack Torrance s'installe avec sa femme et son fils Danny dans un hÃ´tel fermÃ© Ã  la morte saison afin d'Ã©crire un roman. Il apprend que le gardien prÃ©cÃ©dent a tuÃ© sa femme et ses deux filles avant de se suicider. TrÃ¨s vite, Jack va s'apercevoir que des choses Ã©tranges se passent autour de lui et que son fils a des pouvoirs extrasensoriels... ",
+  "country": "FR",
+  "director": {
+    "_id": "person:101"
+  },
+  "actors": [
+    {
+      "_id": "person:103",
+      "role": "Jack Torrance"
+    }
+  ]
+},
+{
+  "_id": "movie:39",
+  "title": "Pas de printemps pour Marnie",
+  "year": 1964,
+  "genre": "Thriller",
+  "summary": "Marnie est engagÃ©e comme secrÃ©taire chez un editeur, Mark Rutland. Celui-ci amoureux d'elle, dÃ©couvre qu'elle est kleptomane et l'oblige Ã  l'Ã©pouser en la menaÃ§ant de la dÃ©noncer. En s'apercevant que Marnie a la phobie de la cou leur rouge, Mark tente de remonter dans le passÃ© de la jeune femme afin de comprendre les raisons de sa nÃ©vrose. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": [
+    {
+      "_id": "person:35",
+      "role": "Mark R"
+    },
+    {
+      "_id": "person:95",
+      "role": "Marnie Edgar"
+    }
+  ]
+},
+{
+  "_id": "movie:40",
+  "title": "Sacrifice",
+  "year": 1986,
+  "genre": "drama",
+  "country": "FR",
+  "director": {
+    "_id": "person:9"
+  },
+  "actors": []
+},
+{
+  "_id": "movie:41",
+  "title": "La mort aux trousses",
+  "year": 1959,
+  "genre": "Suspense",
+  "summary": "Roger Thornhill, publiciste, est pris dans le hall de son hÃ´tel pour un certain Kaplan, un espion. Deux hommes tentent de le tuer et quand il retrouve l'un de ses agresseurs, celui-ci est assassinÃ© devant ses yeux. Pris pour un meurtrier, il est obligÃ© de fuir vers Chicago... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:3"
+  },
+  "actors": [
+    {
+      "_id": "person:105",
+      "role": "Roger O. Thornhill"
+    },
+    {
+      "_id": "person:106",
+      "role": "Eve Kendall"
+    },
+    {
+      "_id": "person:107",
+      "role": "Philipp Vandamm"
+    }
+  ]
+},
+{
+  "_id": "movie:42",
+  "title": "Jeanne d'Arc",
+  "year": 1999,
+  "genre": "Guerre",
+  "country": "FR",
+  "director": {
+    "_id": "person:111"
+  },
+  "actors": [
+    {
+      "_id": "person:112",
+      "role": "Jeanne d'Arc"
+    },
+    {
+      "_id": "person:113",
+      "role": "Yolande d'Aragon"
+    },
+    {
+      "_id": "person:114",
+      "role": "Charles VII"
+    },
+    {
+      "_id": "person:115",
+      "role": "Dunois"
+    }
+  ]
+},
+{
+  "_id": "movie:43",
+  "title": "Le cinquiÃ¨me Ã©lÃ©ment",
+  "year": 1997,
+  "genre": "Science-fiction",
+  "summary": "Au XXIIIÃ¨me siÃ¨cle, dans un univers Ã©trange et colorÃ©, oÃ¹ tout espoir de survie est impossible sans la dÃ©couverte du CinquiÃ¨me ElÃ©ment, un hÃ©ros peu ordinaire affronte le mal pour sauver l'humanitÃ©. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:111"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "Major Korben Dalla"
+    },
+    {
+      "_id": "person:112",
+      "role": "Leeloo"
+    },
+    {
+      "_id": "person:116",
+      "role": "Jean-Baptiste Emmanuel Zorg"
+    },
+    {
+      "_id": "person:117",
+      "role": "Vito Cornelius"
+    }
+  ]
+},
+{
+  "_id": "movie:44",
+  "title": "LÃ©on",
+  "year": 1994,
+  "genre": "Action",
+  "summary": "\"LÃ©on est un tueur. Un de la pire espÃ¨ce. Il est introuvable, indÃ©tectable, pire qu'un sous-marin. Son ombre est comme une menace de danger permanent sur New York. Indestructible LÃ©on ? Oui, jusqu'Ã  ce qu'une petite souris pÃ©nÃ¨tre son univers. Une toute petite souris aux yeux immenses...\" ",
+  "country": "FR",
+  "director": {
+    "_id": "person:111"
+  },
+  "actors": [
+    {
+      "_id": "person:60",
+      "role": "LÃ©on"
+    },
+    {
+      "_id": "person:116",
+      "role": "Norman Stansfield"
+    },
+    {
+      "_id": "person:118",
+      "role": "Mathilda"
+    }
+  ]
+},
+{
+  "_id": "movie:45",
+  "title": "Nikita",
+  "year": 1990,
+  "genre": "Thriller",
+  "summary": "Nikita, droguÃ©e et violente, est prise en mains par des psychiatres qui la rÃ©Ã©duquent, la conditionnent, afin d'en faire une tueuse Ã  la botte des Services Secrets. Plus tard, rÃ©alisant ce qu'elle est devenue, un pion sans vie privÃ©e que l'on manipule, elle tente d'Ã©chapper Ã  ses commanditaires. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:111"
+  },
+  "actors": [
+    {
+      "_id": "person:115",
+      "role": "Bob"
+    },
+    {
+      "_id": "person:119",
+      "role": "Nikita"
+    },
+    {
+      "_id": "person:120",
+      "role": "Marco"
+    }
+  ]
+},
+{
+  "_id": "movie:46",
+  "title": "Le grand bleu",
+  "year": 1988,
+  "genre": "drama",
+  "summary": "Jacques Mayol et Enzo Molinari se connaissent depuis l'enfance. Tous deux experts en apnÃ©e, s'affrontent continuellement pour obtenir le record du monde de plongÃ©e. Toujours en rivalitÃ©, les deux hommes descendent de plus en plus profond, au risque de leurs vies. Le film est ressorti en janvier 89 en version longue d'une durÃ©e de 2h40. ",
+  "country": "FR",
+  "director": {
+    "_id": "person:111"
+  },
+  "actors": [
+    {
+      "_id": "person:39",
+      "role": "Johanna"
+    },
+    {
+      "_id": "person:60",
+      "role": "Enzo Molinari"
+    },
+    {
+      "_id": "person:121",
+      "role": "Jacques Mayol"
+    }
+  ]
+},
+{
+  "_id": "movie:47",
+  "title": "Spider-Man",
+  "year": 2002,
+  "genre": "Action",
+  "summary": "Orphelin, Peter Parker est Ã©levÃ© par sa tante May et son oncle Ben dans le quartier Queens de New York. Tout en poursuivant ses Ã©tudes Ã  l'universitÃ©, il trouve un emploi de photographe au journal Daily Bugle. Il partage son appartement avec Harry Osborn, son meilleur ami, et rÃªve de sÃ©duire la belle Mary Jane.Cependant, aprÃ¨s avoir Ã©tÃ© mordu par une araignÃ©e gÃ©nÃ©tiquement modifiÃ©e, Peter voit son agilitÃ© et sa force s'accroÃ®tre et se dÃ©couvre des pouvoirs surnaturels. Devenu Spider-Man, il dÃ©cide d'utiliser ses nouvelles capacitÃ©s au service du bien.Au mÃªme moment, le pÃ¨re de Harry, le richissime industriel Norman Osborn, est victime d'un accident chimique qui a dÃ©mesurÃ©ment augmentÃ© ses facultÃ©s intellectuelles et sa force, mais l'a rendu fou. Il est devenu le Bouffon Vert, une crÃ©ature dÃ©moniaque qui menace la ville. Entre lui et Spider-Man, une lutte sans merci s'engage.",
+  "country": "USA",
+  "director": {
+    "_id": "person:187"
+  },
+  "actors": [
+    {
+      "_id": "person:124",
+      "role": "Spider-Man"
+    },
+    {
+      "_id": "person:125",
+      "role": "Norman Osborn"
+    },
+    {
+      "_id": "person:126",
+      "role": "Mary Jane Watson"
+    },
+    {
+      "_id": "person:127",
+      "role": "Oncle Ben"
+    },
+    {
+      "_id": "person:128",
+      "role": "Tante May"
+    }
+  ]
+},
+{
+  "_id": "movie:48",
+  "title": "King of New York",
+  "year": 1990,
+  "genre": "drama",
+  "summary": "L'histoire d'un gangster au grand coeur mais aux mÃ©thodes dÃ©finitives, surlast_namemÃ© par le presse The King of New York et qui rÃªve de fonder un hÃ´pital, confrontÃ© a des policiers opiniÃ¢tres qui ont jurÃ© de l'abattre...",
+  "country": "USA",
+  "director": {
+    "_id": "person:122"
+  },
+  "actors": [
+    {
+      "_id": "person:63",
+      "role": "Jimmy Jump"
+    },
+    {
+      "_id": "person:97",
+      "role": "Frank White"
+    },
+    {
+      "_id": "person:124",
+      "role": "Thomas Flanigan"
+    },
+    {
+      "_id": "person:131",
+      "role": "Dennis Gilley"
+    },
+    {
+      "_id": "person:132",
+      "role": "Thomas Flanigan"
+    },
+    {
+      "_id": "person:217",
+      "role": "Test tube"
+    }
+  ]
+},
+{
+  "_id": "movie:49",
+  "title": "The Matrix reloaded",
+  "year": 2003,
+  "genre": "Science-fiction",
+  "summary": "Neo apprend Ã  mieux contrÃ´ler ses dons naturels, alors mÃªme que Sion s'apprÃªte Ã  tomber sous l'assaut de l'ArmÃ©e des Machines. D'ici quelques heures, 250 000 Sentinelles programmÃ©es pour anÃ©antir notre espÃ¨ce envahiront la derniÃ¨re enclave humaine de la Terre.Mais Morpheus galvanise les citoyens de Sion en leur rappelant la Parole de l'Oracle : il est encore temps pour l'Elu d'arrÃªter la guerre contre les Machines. Tous les espoirs se reportent dÃ¨s lors sur Neo. Au long de sa pÃ©rilleuse plongÃ©e au sein de la Matrix et de sa propre destinÃ©e, ce dernier sera confrontÃ© Ã  une rÃ©sistance croissante, une vÃ©ritÃ© encore plus aveuglante, un choix encore plus douloureux que tout ce qu'il avait jamais imaginÃ©.",
+  "country": "USA",
+  "director": {
+    "_id": "person:61"
+  },
+  "actors": [
+    {
+      "_id": "person:62",
+      "role": "Neo"
+    },
+    {
+      "_id": "person:63",
+      "role": "Morpheus"
+    },
+    {
+      "_id": "person:210",
+      "role": "Trinity"
+    },
+    {
+      "_id": "person:211",
+      "role": "Agent Smith"
+    }
+  ]
+},
+{
+  "_id": "movie:50",
+  "title": "The Matrix Revolutions",
+  "year": 2003,
+  "genre": "Science-fiction",
+  "summary": "La longue quÃªte de libertÃ© des rebelles culmine en une bataille finale explosive. Tandis que l'armÃ©e des Machines sÃ¨me la dÃ©solation sur Zion, ses citoyens organisent une dÃ©fense acharnÃ©e. Mais pourront-ils retenir les nuÃ©es implacables des Sentinelles en attendant que Neo s'approprie l'ensemble de ses pouvoirs et mette fin Ã  la guerre ?L'agent Smith est quant Ã  lui parvenu Ã  prendre possession de l'esprit de Bane, l'un des membres de l'Ã©quipage de l'aÃ©roglisseur. De plus en plus puissant, il est dÃ©sormais incontrÃ´lable et n'obÃ©it plus aux Machines : il menace de dÃ©truire leur empire ainsi que le monde rÃ©el et la Matrice... ",
+  "country": "USA",
+  "director": {
+    "_id": "person:135"
+  },
+  "actors": [
+    {
+      "_id": "person:62",
+      "role": "Neo"
+    },
+    {
+      "_id": "person:63",
+      "role": "Morpheus"
+    },
+    {
+      "_id": "person:134",
+      "role": "Agent Smith"
+    },
+    {
+      "_id": "person:136",
+      "role": "Trinity"
+    },
+    {
+      "_id": "person:137",
+      "role": "L'Oracle"
+    }
+  ]
+},
+{
+  "_id": "movie:51",
+  "title": "De bruit et de fureur",
+  "year": 1988,
+  "genre": "drama",
+  "summary": "L'histoire de Bruno, enfant attardÃ© des banlieues et des H.L.M., plongÃ© dans la violence de son milieu, et dont la vie va se consumer comme une Ã©toile filante.",
+  "country": "FR",
+  "director": {
+    "_id": "person:138"
+  },
+  "actors": [
+    {
+      "_id": "person:139",
+      "role": "Marcel"
+    },
+    {
+      "_id": "person:140",
+      "role": "Enseignante"
+    },
+    {
+      "_id": "person:141",
+      "role": "Bruno"
+    }
+  ]
+},
+{
+  "_id": "movie:52",
+  "title": "Usual suspects",
+  "year": 1995,
+  "genre": "Thriller",
+  "summary": "Une lÃ©gende du crime contraint cinq malfrats Ã  aller s'aquitter d'une tÃ¢che trÃ¨s pÃ©rilleuse. Ceux qui survivent pourront se partager un butin de 90 millions de dollars.",
+  "country": "USA",
+  "director": {
+    "_id": "person:142"
+  },
+  "actors": [
+    {
+      "_id": "person:18",
+      "role": "Roger \"Verbal\" Kint"
+    },
+    {
+      "_id": "person:143",
+      "role": "Micheal McManus"
+    },
+    {
+      "_id": "person:144",
+      "role": "Dean Keaton"
+    },
+    {
+      "_id": "person:145",
+      "role": "Fred Fenster"
+    },
+    {
+      "_id": "person:146",
+      "role": "Todd Hockney"
+    }
+  ]
+},
+{
+  "_id": "movie:53",
+  "title": "Bad Lieutenant",
+  "year": 1992,
+  "genre": "drama",
+  "summary": "La descente aux enfers d'un flic pourri qui enquete sur le viol d'une jolie religieuse.",
+  "country": "USA",
+  "director": {
+    "_id": "person:122"
+  },
+  "actors": [
+    {
+      "_id": "person:98",
+      "role": "Le lieutenant"
+    }
+  ]
+},
+{
+  "_id": "movie:54",
+  "title": "Le parrain",
+  "year": 1972,
+  "genre": "drama",
+  "summary": "En 1945, Ã  New York, les Corleone sont une des cinq familles de la mafia. Don Vito Corleone, \" parrain \" de cette famille, marie sa fille Ã  un bookmaker. Sollozzo, \" parrain \" de la famille Tattaglia, propose Ã  Don Vito une association dans le trafic de drogue, mais celui-ci refuse. Sonny, un de ses fils, y est quant Ã  lui favorable.Afin de traiter avec Sonny, Sollozzo tente de faire tuer Don Vito, mais celui-ci en rÃ©chappe. Michael, le frÃ¨re cadet de Sonny, recherche alors les commanditaires de l'attentat et tue Sollozzo et le chef de la police, en reprÃ©sailles.Michael part alors en Sicile, oÃ¹ il Ã©pouse Apollonia, mais celle-ci est assassinÃ©e Ã  sa place. De retour Ã  New York, Michael Ã©pouse Kay Adams et se prÃ©pare Ã  devenir le successeur de son pÃ¨re...",
+  "country": "USA",
+  "director": {
+    "_id": "person:181"
+  },
+  "actors": [
+    {
+      "_id": "person:137",
+      "role": "Sonny Corleone"
+    },
+    {
+      "_id": "person:155",
+      "role": "Capt. McCluskey"
+    },
+    {
+      "_id": "person:176",
+      "role": "Michael Corleone"
+    },
+    {
+      "_id": "person:182",
+      "role": "Do Vito Corleone"
+    },
+    {
+      "_id": "person:183",
+      "role": "Kay Adams"
+    },
+    {
+      "_id": "person:184",
+      "role": "Tom Hagen"
+    }
+  ]
+},
+{
+  "_id": "movie:55",
+  "title": "Le parrain II",
+  "year": 1974,
+  "genre": "drama",
+  "summary": "A la mort de Vito Corleone, dit \"le Parrain\", c'est son fils, Michael, qui reprend les affaires familiales. TrÃ¨s vite, son ascension dans le milieu mafiosi est fulgurante.Depuis la mort De Don Vito Corleone, son fils, Michael, rÃ¨gne sur la famille. AmenÃ© Ã  nÃ©gocier avec la mafia juive, il perd alors le soutien d'un de ses lieutenants, Frankie Pentageli. Echappant de justesse Ã  un attentat, Michael tente de retrouver le coupable, soupÃ§onnant Hyman Roth, le chef de la mafia juive.Vito Corleone, immigrant italien, arrive Ã  New York au dÃ©but du siÃ¨cle ; trÃ¨s vite, il devient un des caÃ¯ds du quartier, utilisant la violence comme moyen de rÃ©gler toutes les affaires. Seul au dÃ©part, il bÃ¢tit peu Ã  peu un vÃ©ritable empire, origine de la fortune de la famille des Corleone. ",
+  "country": "USA",
+  "director": {
+    "_id": "person:181"
+  },
+  "actors": [
+    {
+      "_id": "person:167",
+      "role": "Don Vito Corleone"
+    },
+    {
+      "_id": "person:176",
+      "role": "Michael Corleone"
+    },
+    {
+      "_id": "person:183",
+      "role": "Kay Adams"
+    },
+    {
+      "_id": "person:184",
+      "role": "Tom Hagen"
+    }
+  ]
+},
+{
+  "_id": "movie:56",
+  "title": "Le parrain III",
+  "year": 1990,
+  "genre": "drama",
+  "summary": "Atteignant la soixantaine, Michael Corleone dÃ©sire Ã  la fois renouer avec les siens et se rÃ©habiliter aux yeux de la sociÃ©tÃ©, surtout de l'Eglise. Il arrivera presque a ses fins, mais sa vie passÃ©e et ses anciens ennemis le rattraperont plus vite.Michael Corleone est fatiguÃ©. Il veut prendre ses distances avec les activitÃ©s mafieuses de sa famille. Il veut convertir ces activitÃ©s en affaires lÃ©gales. Kay, son ex-femme, lui fait mÃªme accepter que leur fils devienne un chanteur d'opÃ©ra et ne reprenne pas les activitÃ©s familiales.Pendant ce temps, la fille de Michael, Mary, et son neveu, le fils de Sonny, Vincent, nouent une idylle qui n'est pas la bienvenue dans la famille.Il dÃ©cide d'aider le Vatican Ã  renflouer ses caisses et reÃ§oit en Ã©change le contrÃ´le d'une entreprise immobiliÃ¨re leur appartenant. Attisant la jalousie de ses pairs, Michael Ã©chappe de justesse Ã  un attentat commis par l'un d'eux. Vincent se propose alors pour reprendre les affaires de la famille en main.",
+  "country": "USA",
+  "director": {
+    "_id": "person:181"
+  },
+  "actors": [
+    {
+      "_id": "person:1",
+      "role": "Mary Corleone"
+    },
+    {
+      "_id": "person:176",
+      "role": "Michael Corleone"
+    },
+    {
+      "_id": "person:183",
+      "role": "Kay Adams"
+    },
+    {
+      "_id": "person:186",
+      "role": "Vincent Mancini"
+    }
+  ]
+},
+{
+  "_id": "movie:57",
+  "title": "Jackie Brown",
+  "year": 1997,
+  "genre": "crime",
+  "summary": "Jackie Brown, hÃ´tesse de l'air, arrondit ses fins de mois en convoyant de l'argent liquide pour le compte d'un trafiquant d'armes, Ordell Robbie. Un jour, un agent federal et un policier de Los Angeles la cueillent Ã  l'aÃ©roport. Ils comptent sur elle pour faire tomber le trafiquant. Jackie Ã©chafaude alors un plan audacieux pour doubler tout le monde lors d'un prochain transfert qui porte sur la modeste somme de cinq cent mille dollars. Mais il lui faudra compter avec les complices d'Ordell, qui ont des mÃ©thodes plutÃ´t expÃ©ditives.",
+  "country": "USA",
+  "director": {
+    "_id": "person:37"
+  },
+  "actors": [
+    {
+      "_id": "person:167",
+      "role": "Luis Gara"
+    },
+    {
+      "_id": "person:168",
+      "role": "Jackie Brown"
+    },
+    {
+      "_id": "person:169",
+      "role": "Melanie"
+    },
+    {
+      "_id": "person:170",
+      "role": "Ray Nicolette"
+    },
+    {
+      "_id": "person:212",
+      "role": "Ordell Robbie"
+    }
+  ]
+},
+{
+  "_id": "movie:58",
+  "title": "Une journÃ©e en enfer",
+  "year": 1995,
+  "genre": "Action",
+  "summary": "John McClane est cette fois-ci aux prises avec un maÃ®tre chanteur, facÃ©tieux et dangereux, qui dÃ©pose des bombes dans New York.",
+  "country": "USA",
+  "director": {
+    "_id": "person:168"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "McClane"
+    },
+    {
+      "_id": "person:38",
+      "role": "Zeus Carver"
+    },
+    {
+      "_id": "person:169",
+      "role": "Simon Gruber"
+    }
+  ]
+},
+{
+  "_id": "movie:59",
+  "title": "SixiÃ¨me sens",
+  "year": 1999,
+  "genre": "Fantastique",
+  "summary": "Cole Sear, garconnet de huit ans est hantÃ© par un terrible secret. Son imaginaire est visitÃ© par des esprits menacants. Trop jeune pour comprendre le pourquoi de ces apparitions et traumatisÃ© par ces pouvoirs paranormaux, Cole s'enferme dans une peur maladive et ne veut reveler Ã  personne la cause de son enfermement, Ã  l'exception d'un psychologue pour enfants. La recherche d'une explication rationnelle guidera l'enfant et le thÃ©rapeute vers une vÃ©ritÃ© foudroyante et inexplicable.",
+  "country": "USA",
+  "director": {
+    "_id": "person:170"
+  },
+  "actors": [
+    {
+      "_id": "person:27",
+      "role": "Malcom Crowe"
+    },
+    {
+      "_id": "person:171",
+      "role": "Cole Sear"
+    }
+  ]
+},
+{
+  "_id": "movie:60",
+  "title": "Lost in Translation",
+  "year": 2003,
+  "genre": "romance",
+  "summary": "Bob Harris, acteur sur le dÃ©clin, se rend Ã  Tokyo pour touner un spot publicitaire. Il a conscience qu'il se trompe - il devrait Ãªtre chez lui avec sa famille, jouer au thÃ©Ã¢tre ou encore chercher un rÃ´le dans un film -, mais il a besoin d'argent.Du haut de son hÃ´tel de luxe, il contemple la ville, mais ne voit rien. Il est ailleurs, dÃ©tachÃ© de tout, incapable de s'intÃ©grer Ã  la rÃ©alitÃ© qui l'entoure, incapable Ã©galement de dormir Ã  cause du dÃ©calage horaire.Dans ce mÃªme Ã©tablissement, Charlotte, une jeune AmÃ©ricaine fraÃ®chement diplÃ´mÃ©e, accompagne son mari, photographe de mode. Ce dernier semble s'intÃ©resser davantage Ã  son travail qu'Ã  sa femme. Se sentant dÃ©laissÃ©e, Charlotte cherche un peu d'attention. Elle va en trouver auprÃ¨s de Bob...",
+  "country": "USA",
+  "director": {
+    "_id": "person:172"
+  },
+  "actors": [
+    {
+      "_id": "person:173",
+      "role": "Bob Harris"
+    },
+    {
+      "_id": "person:174",
+      "role": "Charlotte"
+    },
+    {
+      "_id": "person:175",
+      "role": "John"
+    },
+    {
+      "_id": "person:176",
+      "role": "Kelly"
+    },
+    {
+      "_id": "person:177",
+      "role": "Patron Nightclub"
+    }
+  ]
+}]

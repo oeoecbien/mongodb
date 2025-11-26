@@ -1,0 +1,251 @@
+-- Requêtes MapReduce via aggregate()
+-- A. Calculs avec aggregate()
+
+// 1. Calculer le CA HT par sexe
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: { $toUpper: "$user.sexe" },
+      ca_ht: { $sum: "$totalht" }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+
+// 2. Calculer le CA TTC par code postal (CP)
+db.commandes.aggregate([
+  {
+    $project: {
+      cp: "$user.cp",
+      ca_ttc: { $add: ["$totalht", "$tva"] }
+    }
+  },
+  {
+    $group: {
+      _id: "$cp",
+      ca_ttc_total: { $sum: "$ca_ttc" }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+
+// 3. Calculer le nombre de commandes par nom client
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: "$user.nom",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nb_commandes: -1 }
+  }
+])
+
+// 4. Nombre de commandes par famille (même nom de famille)
+db.commandes.aggregate([
+  {
+    $project: {
+      nom_famille: {
+        $arrayElemAt: [
+          { $split: ["$user.nom", " "] },
+          0
+        ]
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "$nom_famille",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nb_commandes: -1 }
+  }
+])
+
+// 5. Calculer le nombre de jeux commandés par client
+db.commandes.aggregate([
+  {
+    $project: {
+      nom: "$user.nom",
+      nbJeux: {
+        $cond: {
+          if: { $isArray: "$games" },
+          then: { $size: "$games" },
+          else: 0
+        }
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "$nom",
+      total_jeux: { $sum: "$nbJeux" }
+    }
+  },
+  {
+    $sort: { total_jeux: -1 }
+  }
+])
+
+// 6. Calculer le CA par titre de jeu
+db.commandes.aggregate([
+  {
+    $unwind: "$games"
+  },
+  {
+    $group: {
+      _id: "$games.titre",
+      ca: { $sum: "$games.prix" }
+    }
+  },
+  {
+    $sort: { ca: -1 }
+  }
+])
+
+// 7. Calculer le CA par année/mois
+db.commandes.aggregate([
+  {
+    $project: {
+      annee: { $year: "$date" },
+      mois: { $month: "$date" },
+      ca: "$totalht"
+    }
+  },
+  {
+    $group: {
+      _id: { annee: "$annee", mois: "$mois" },
+      ca_total: { $sum: "$ca" }
+    }
+  },
+  {
+    $sort: { "_id.annee": 1, "_id.mois": 1 }
+  }
+])
+
+// 8. Nombre moyen de jeux par commande
+db.commandes.aggregate([
+  {
+    $project: {
+      nbJeux: {
+        $cond: {
+          if: { $isArray: "$games" },
+          then: { $size: "$games" },
+          else: 0
+        }
+      }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      moyenne_jeux: { $avg: "$nbJeux" }
+    }
+  }
+])
+
+// 9. CA total (HT + TVA)
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: null,
+      ca_total_ttc: { $sum: { $add: ["$totalht", "$tva"] } }
+    }
+  }
+])
+
+// 10. Nombre de commandes par mois
+db.commandes.aggregate([
+  {
+    $unwind: "$games"
+  },
+  {
+    $group: {
+      _id: "$games.titre",
+      nb_ventes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nb_ventes: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+
+// 11. Clients ayant commandé sans jeux
+db.commandes.aggregate([
+  {
+    $match: {
+      games: { $exists: false }
+    }
+  }
+])
+
+// 12. Liste unique des jeux commandés
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: "$user.cp",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nb_commandes: -1 }
+  }
+])
+
+// 13. Prix moyen par jeu
+db.commandes.aggregate([
+  {
+    $unwind: "$games"
+  },
+  {
+    $group: {
+      _id: "$games.titre",
+      prixMoyen: { $avg: "$games.prix" }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+
+// 14. Nombre de commandes par code postal
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: "$user.cp",
+      nb_cmd: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nb_cmd: -1 }
+  }
+])
+
+// 15. Jeu le plus vendu
+db.commandes.aggregate([
+  {
+    $unwind: "$games"
+  },
+  {
+    $group: {
+      _id: "$games.titre",
+      nbVentes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { nbVentes: -1 }
+  },
+  {
+    $limit: 1
+  }
+])

@@ -1,0 +1,586 @@
+-- Requêtes (find / aggregate / count)
+
+-- A. find()
+
+// 1. Afficher les titres des jeux dont le prix est supérieur à 60 €
+db.games.find({'infos.prix': {$gt: 60}}, {titre: 1, _id: 0})
+
+// 2. Afficher les jeux dont le prix est inférieur à 50 € sans l’ID
+db.games.find({'infos.prix': {$lt: 50}}, {_id: 0})
+
+// 3. Afficher les jeux dont le prix est 49.99 € ou 74.99 €
+db.games.find({$or: [{'infos.prix': 49.99}, {'infos.prix': 74.99}]})
+
+// 4. Afficher les jeux dont le prix est compris entre 50 € et 70 €
+db.games.find({'infos.prix': {$gte: 50, $lte: 70}})
+
+// 5. Afficher les jeux dont la note FNAC ≥ 3, triés par note FNAC décroissante
+db.games.find({'note Fnac': {$gte: 3}}).sort({'note Fnac': -1})
+
+// 6. Afficher les jeux dont l’éditeur est parmi une liste
+db.games.find({'infos.editeur': {$in: ['Sony', 'Nintendo']}})
+
+// 7. Afficher les jeux dont l’éditeur est Sony et dont le prix est > 60 €
+db.games.find({'infos.editeur': 'Sony', 'infos.prix': {$gt: 60}})
+
+// 8. Afficher les jeux qui ne sont pas édités par Nintendo
+db.games.find({'infos.editeur': {$ne: 'Nintendo'}})
+
+// 9. Afficher les jeux non compatibles avec la console PS5
+db.games.find({consoles: {$ne: 'PS5'}})
+
+// 10. Afficher les jeux qui ne fonctionnent ni sur PS5 ni sur Xbox
+db.games.find({consoles: {$nin: ['PS5', 'Xbox One', 'Xbox Series X']}})
+
+// 11. Afficher les jeux fonctionnant sur les consoles PS (toutes versions)
+db.games.find({consoles: /^PS/})
+
+// 12. Afficher les jeux édités par Nintendo mais pas compatibles sur PS4
+db.games.find({'infos.editeur': 'Nintendo', consoles: {$ne: 'PS4'}})
+
+// 13. Afficher les jeux ayant une note adhérent < 3
+db.games.find({'notes adherents':  {$lt: 3}})
+
+// 14. Afficher les jeux sans le champ 'prix adhérent FNAC'
+db.games.find({'infos.prix adhérent FNAC': {$exists: false}})
+
+// 15. Afficher les jeux dont le champ 'resume' est présent
+db.games.find({'infos.resume': {$exists: true}})
+
+// 16. Afficher les jeux dont le titre commence par 'M'
+db.games.find({titre: /^M/i})
+
+-- B. aggregate(), count(), distinct(), $skip, $unwind etc.
+
+// 17. Afficher les jeux à partir du numéro 3 (pagination)
+db.games.find().skip(2)
+
+// 18. Trier les jeux par prix décroissant
+db.games.find().sort({'infos.prix': -1})
+
+// 19. Afficher la note moyenne donnée par les adhérents (tous jeux confondus)
+db.games.aggregate([
+  {$unwind: '$notes adherents'},
+  {$group: {_id: null, moyenne: {$avg: '$notes adherents'}}}
+])
+
+// 20. Afficher la note moyenne donnée par les adhérents par jeu
+db.games.aggregate([
+  {$unwind: '$notes adherents'},
+  {$group: {_id: '$titre', moyenne: {$avg: '$notes adherents'}}}
+])
+
+// 21. Afficher la note max donnée par les adhérents par éditeur
+db.games.aggregate([
+  {$unwind: '$notes adherents'},
+  {$group: {_id: '$infos.editeur', noteMax: {$max: '$notes adherents'}}}
+])
+
+// 22. Afficher la note moyenne par éditeur et par console
+db.games.aggregate([
+  {$unwind: '$notes adherents'},
+  {$unwind: '$consoles'},
+  {$group: {
+      _id: {editeur: '$infos.editeur', console: '$consoles'},
+      moyenne: {$avg: '$notes adherents'}
+  }}
+])
+
+// 23. Afficher le nombre de jeux par éditeur
+db.games.aggregate([
+  {$group: {_id: '$infos.editeur', nbJeux: {$count: {}}}}
+])
+
+// 24. Afficher le nombre de jeux contenant un champ 'note Fnac'
+db.games.countDocuments({'note Fnac': {$exists: true}})
+
+// 25. Afficher pour chaque console le nombre de jeux compatibles, tri décroissant
+db.games.aggregate([
+  {$unwind: '$consoles'},
+  {$group: {_id: '$consoles', nbJeux: {$count: {}}}},
+  {$sort: {nbJeux: -1}}
+])
+
+// 26. Afficher le nombre de consoles par jeu
+db.games.aggregate([
+  {$project: {titre: 1, nbConsoles: {$size: '$consoles'}}}
+])
+
+-- C. Mises à jour et suppressions (updateOne() & deleteOne())
+
+// Modifier la note Fnac du jeu ayant _id = 2
+db.games.updateOne(
+  { _id: 2 },
+  { $set: { "note Fnac": 3.0 } }
+)
+
+// Mettre à jour tous les jeux édités par Sony pour leur ajouter un champ "disponible": true
+db.games.updateMany(
+  { "infos.editeur": "Sony" },
+  { $set: { disponible: true } }
+)
+
+// Supprimer le champ "prix adhérent FNAC" pour les jeux qui l’ont
+db.games.updateMany(
+  { "infos.prix adhérent FNAC": { $exists: true } },
+  { $unset: { "infos.prix adhérent FNAC": "" } }
+)
+
+// Supprimer le jeu avec l’identifiant _id = 2
+db.games.deleteOne({ _id: 2 })
+
+// Supprimer tous les jeux édités par Sony
+db.games.deleteMany({ "infos.editeur": "Sony" })
+
+-- D. Modélisation
+
+// Dupliquer la collection games en games2
+db.games.aggregate([{ $out: "games2" }])
+
+// Création et ajout de données dans la table "pegi"
+db.pegi.insertMany([
+  {
+    "Code_pegi": "PEGI3",
+    "Desc_pegi": "Adapté à toutes les classes d'âge",
+    "Categorie_pegi": "Enfant"
+  },
+  {
+    "Code_pegi": "PEGI7",
+    "Desc_pegi": "Scènes ou sons potentiellement effrayants",
+    "Categorie_pegi": "Enfant"
+  },
+  {
+    "Code_pegi": "PEGI12",
+    "Desc_pegi": "Scènes de violence imagées",
+    "Categorie_pegi": "Adolescent"
+  },
+  {
+    "Code_pegi": "PEGI16",
+    "Desc_pegi": "Scènes de violence ou contacts sexuels semblables à ceux de la réalité",
+    "Categorie_pegi": "Adolescent"
+  },
+  {
+    "Code_pegi": "PEGI18",
+    "Desc_pegi": "Violence crue donnant un sentiment de dégoût",
+    "Categorie_pegi": "Adulte"
+  }
+])
+
+// Ajouter un champ "pegi" dans la collection "games"
+var pegis = db.pegi.find().toArray()
+var jeux = db.games.find().toArray()
+
+for (var i = 0; i < jeux.length; i++) {
+  var pegi = pegis[i % pegis.length]
+  db.games.updateOne(
+    { _id: jeux[i]._id },
+    {
+      $set: {
+        "pegi": {
+          "_id": pegi._id,
+          "Code_pegi": pegi.Code_pegi,
+          "Desc_pegi": pegi.Desc_pegi
+        }
+      }
+    }
+  )
+}
+
+// Ajouter le champ pegi (version simplifiée) dans games2
+var pegis = db.pegi.find().toArray()
+var jeux2 = db.games2.find().toArray()
+
+for (var i = 0; i < jeux2.length; i++) {
+  var pegi = pegis[i % pegis.length]
+  db.games2.updateOne(
+    { _id: jeux2[i]._id },
+    { $set: { "pegi": pegi._id } }
+  )
+}
+
+// Jointure entre games2 et pegi (en partant de games2)
+db.games2.aggregate([
+  {
+    $lookup: {
+      from: "pegi",
+      localField: "pegi",
+      foreignField: "_id",
+      as: "pegi_info"
+    }
+  },
+  { $unwind: "$pegi_info" },
+  {
+    $project: {
+      _id: 0,
+      titre: 1,
+      consoles: 1,
+      "infos.prix": 1,
+      "description PEGI": "$pegi_info.Desc_pegi"
+    }
+  }
+])
+
+// Jointure entre pegi et games2 (en partant de pegi)
+db.pegi.aggregate([
+  {
+    $lookup: {
+      from: "games2",
+      localField: "_id",
+      foreignField: "pegi",
+      as: "jeux"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      Code_pegi: 1,
+      Desc_pegi: 1,
+      "jeux.titre": 1,
+      "jeux.consoles": 1
+    }
+  }
+])
+
+-- E. Transactions
+
+// Transaction d’insertion (PEGI + 2 jeux)
+var session = db.getMongo().startSession()
+session.startTransaction()
+
+try {
+  // Références aux collections dans la session
+  var pegiColl = session.getDatabase("bdgames").pegi
+  var games2Coll = session.getDatabase("bdgames").games2
+
+  var newPegi = {
+    Code_pegi: "PEGI70",
+    Desc_pegi: "Jeux spécialement adaptés pour les séniors",
+    Categorie_pegi: "Senior"
+  }
+
+  pegiColl.insertOne(newPegi)
+  var pegiId = pegiColl.findOne({ Code_pegi: "PEGI70" })._id
+
+  games2Coll.insertMany([
+    {
+      titre: "Brain Relax Deluxe",
+      consoles: ["Switch"],
+      infos: { editeur: "MindSoft", prix: 39.99 },
+      pegi: pegiId
+    },
+    {
+      titre: "Sudoku Master 3D",
+      consoles: ["PC", "Switch"],
+      infos: { editeur: "Logic Games Studio", prix: 29.99 },
+      pegi: pegiId
+    }
+  ])
+
+  // Validation de la transaction
+  session.commitTransaction()
+  print("Transaction réussie : PEGI70 et 2 jeux ajoutés.")
+} catch (e) {
+  print("Erreur détectée, annulation de la transaction : " + e)
+  session.abortTransaction()
+} finally {
+  session.endSession()
+}
+
+// Transaction de modification (PEGI + jeux liés)
+var session = db.getMongo().startSession()
+session.startTransaction()
+
+try {
+  var dbSession = session.getDatabase("bdgames")
+  var pegiColl = dbSession.pegi
+  var gamesColl = dbSession.games
+
+  var pegiToUpdate = pegiColl.findOne({ Desc_pegi: "Scènes de violence imagées" })
+
+  if (pegiToUpdate) {
+    pegiColl.updateOne(
+      { _id: pegiToUpdate._id },
+      { $set: { Desc_pegi: "Scènes de violence ou de sexe imagées" } }
+    )
+
+    gamesColl.updateMany(
+      { "pegi._id": pegiToUpdate._id },
+      { $set: { "pegi.Desc_pegi": "Scènes de violence ou de sexe imagées" } }
+    )
+
+    session.commitTransaction()
+    print("Transaction réussie : PEGI et jeux mis à jour.")
+  } else {
+    print("Aucun PEGI trouvé à mettre à jour.")
+    session.abortTransaction()
+  }
+} catch (e) {
+  print("Erreur détectée : " + e)
+  session.abortTransaction()
+} finally {
+  session.endSession()
+}
+
+-- F. JSON Schema
+
+// Nouvelle bdd et collection movies
+use bdmovies
+
+db.createCollection("movies")
+
+// Schéma JSON pour la collection movies
+db.runCommand({
+  collMod: "movies",
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "genre", "title", "year", "country", "director"],
+      properties: {
+        _id: {
+          bsonType: "string",
+          description: "doit être une chaîne de caractères et est obligatoire"
+        },
+        title: {
+          bsonType: "string",
+          description: "title doit être une chaîne de caractères et est obligatoire"
+        },
+        year: {
+          bsonType: "int",
+          minimum: 1950,
+          maximum: 2025,
+          description: "year doit être un entier entre 1950 et 2025"
+        },
+        genre: {
+          bsonType: "string",
+          description: "genre doit être une chaîne de caractères et est obligatoire"
+        },
+        summary: {
+          bsonType: "string",
+          description: "summary doit être une chaîne de caractères"
+        },
+        country: {
+          enum: ["USA", "FR", "IT", "DE", "Autre"],
+          description: "country doit être parmi USA, FR, IT, DE, Autre"
+        },
+        director: {
+          bsonType: "object",
+          required: ["_id"],
+          properties: {
+            _id: {
+              bsonType: "string",
+              description: "doit être une chaîne de caractères"
+            }
+          }
+        },
+        actors: {
+          bsonType: "array",
+          maxItems: 6,
+          items: {
+            bsonType: "object",
+            required: ["_id", "role"],
+            properties: {
+              _id: {
+                bsonType: "string",
+                description: "items id doit être une chaîne de caractères"
+              },
+              role: {
+                bsonType: "string",
+                description: "items role doit être une chaîne de caractères"
+              }
+            }
+          },
+          description: "description doit être un tableau avec maximum 6 acteurs"
+        }
+      }
+    }
+  },
+  validationLevel: "moderate",
+  validationAction: "error"
+})
+
+// Correction des documents non valides
+db.movies.updateMany(
+  { year: { $gt: 2025 } },
+  { $set: { year: 2025 } }
+)
+
+db.movies.updateMany(
+  { country: { $nin: ["USA", "FR", "IT", "DE", "Autre"] } },
+  { $set: { country: "Autre" } }
+)
+
+db.movies.updateMany(
+  { $expr: { $gt: [{ $size: { $ifNull: ["$actors", []] } }, 6] } },
+  [
+    {
+      $set: {
+        actors: { $slice: ["$actors", 6] }
+      }
+    }
+  ]
+)
+
+db.movies.deleteMany({
+  $or: [
+    { title: { $exists: false } },
+    { genre: { $exists: false } },
+    { director: { $exists: false } }
+  ]
+})
+
+// Schéma JSON pour la collection games
+db.runCommand({
+  collMod: "games",
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["titre", "consoles"],
+      properties: {
+        _id: {
+          description: "_id peut être de n'importe quel type"
+        },
+        titre: {
+          bsonType: "string",
+          description: "titre doit être une chaîne et est obligatoire"
+        },
+        consoles: {
+          bsonType: "array",
+          minItems: 1,
+          items: {
+            bsonType: "string",
+            enum: ["PS4", "PS5", "Xbox One", "Xbox Series X", "Switch", "PC"]
+          },
+          description: "consoles doit être un tableau non vide de consoles valides"
+        },
+        infos: {
+          bsonType: "object",
+          properties: {
+            editeur: {
+              bsonType: "string",
+              description: "editeur doit être une chaîne"
+            },
+            resume: {
+              bsonType: "string",
+              description: "resume doit être une chaîne"
+            },
+            prix: {
+              bsonType: "double",
+              minimum: 0,
+              description: "prix doit être un nombre positif"
+            },
+            "prix adhérent FNAC": {
+              bsonType: "double",
+              minimum: 0,
+              description: "prix adhérent FNAC doit être un nombre positif"
+            }
+          },
+          description: "infos doit être un objet"
+        },
+        "date sortie": {
+          bsonType: "date",
+          description: "date sortie doit être une date"
+        },
+        "note Fnac": {
+          bsonType: "double",
+          minimum: 0,
+          maximum: 5,
+          description: "note Fnac doit être entre 0 et 5"
+        },
+        "notes adherents": {
+          bsonType: "array",
+          items: {
+            bsonType: "double",
+            minimum: 0,
+            maximum: 5
+          },
+          description: "notes adherents doit être un tableau de notes entre 0 et 5"
+        },
+        pegi: {
+          bsonType: "object",
+          properties: {
+            _id: {
+              bsonType: "objectId",
+              description: "pegi._id doit être un ObjectId"
+            },
+            desc_pegi: {
+              bsonType: "string",
+              description: "pegi.desc_pegi doit être une chaîne"
+            }
+          },
+          description: "pegi doit être un objet contenant l'ID et la description"
+        }
+      }
+    }
+  },
+  validationLevel: "moderate",
+  validationAction: "warn"
+})
+
+// Correction des documents non valides dans games
+db.games.find({
+  $or: [
+    { titre: { $exists: false } },
+    { consoles: { $exists: false } },
+    { consoles: { $size: 0 } }
+  ]
+})
+
+db.games.deleteMany({ titre: { $exists: false } })
+
+db.games.updateMany(
+  { $or: [{ consoles: { $exists: false } }, { consoles: { $size: 0 } }] },
+  { $set: { consoles: ["PC"] } }
+)
+
+-- G. Indexation et plan d’exécution
+
+// Création d'un index simple sur le champ titre
+db.games.createIndex({ "titre": 1 })
+
+// Création d'un index composé sur les champs editeur et prix
+db.games.createIndex({ "infos.editeur": 1, "infos.prix": 1 })
+
+// Création d'un index texte sur le champ resume
+db.games.createIndex({ "infos.resume": "text" })
+
+// Création d'un index MultiKey sur le champ consoles
+db.games.createIndex({ "consoles": 1 })
+
+// Création d'un index unique sur le champ titre
+db.games.createIndex({ "titre": 1 }, { unique: true })
+
+// Création d'un index TTL sur le champ date sortie
+db.games.createIndex({ "date sortie": 1 }, { expireAfterSeconds: 315360000 })
+
+// Création d'un index partiel sur le champ prix
+db.games.createIndex({ "infos.prix": 1 }, { partialFilterExpression: { "infos.prix": { $gt: 50 } } })
+
+// Création d'un index sparse sur le champ prix
+db.games.createIndex({ "infos.prix": 1 }, { sparse: true })
+
+// Création d'un index insensible à la casse sur le champ titre
+db.games.createIndex({ "titre": 1 }, { collation: { locale: "en", strength: 2 } })
+
+// Vérification des index
+db.games.getIndexes()
+
+// Validation de la collection
+db.games.validate()
+
+// Obtention des statistiques
+db.games.stats()
+
+// Obtention de la taille totale des index
+db.games.totalIndexSize()
+
+// Réindexation de la collection
+db.games.reIndex()
+
+// Exemple de requête avec explain
+db.games.find({ "titre": "NBA 2K24 Edition Légende Black Mamba" }).explain("executionStats")
+
+// Exemple de requête utilisant un index composé
+db.games.find({ "infos.editeur": "Take-Two", "infos.prix": { $gt: 50 } }).explain("executionStats")
+
+// Exemple de requête utilisant un index texte
+db.games.find({ $text: { $search: "basket" } }).explain("executionStats")
