@@ -2057,6 +2057,8 @@ print("Temps avec index: " + tempsAvecIndex + "ms")
 
 **Objectif** : Grouper par critères complexes
 
+#### Questions
+
 1. Calculer le chiffre d'affaires par ville (en extrayant la ville depuis les clients)
 
 2. Calculer le nombre de commandes par tranche de prix :
@@ -2064,9 +2066,73 @@ print("Temps avec index: " + tempsAvecIndex + "ms")
    - "500-1000€"
    - "Plus de 1000€"
 
+#### Solutions
+
+**1. CA par ville**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $group: {
+      _id: "$client_info.adresse.ville",
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  }
+])
+```
+
+**2. Nombre de commandes par tranche de prix**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      tranche_prix: {
+        $cond: [
+          { $lt: ["$total_ttc", 500] },
+          "Moins de 500€",
+          {
+            $cond: [
+              { $lte: ["$total_ttc", 1000] },
+              "500-1000€",
+              "Plus de 1000€"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "$tranche_prix",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+```
+
 ### Exercice 11.2 : Manipulation de dates
 
 **Objectif** : Analyser les données temporelles
+
+#### Questions
 
 1. Calculer le chiffre d'affaires par trimestre
 
@@ -2074,17 +2140,176 @@ print("Temps avec index: " + tempsAvecIndex + "ms")
 
 3. Trouver le jour de la semaine le plus rentable
 
+#### Solutions
+
+**1. CA par trimestre**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      annee: { $year: "$date_commande" },
+      mois: { $month: "$date_commande" },
+      total_ttc: 1
+    }
+  },
+  {
+    $project: {
+      annee: 1,
+      trimestre: {
+        $cond: [
+          { $lte: ["$mois", 3] },
+          1,
+          {
+            $cond: [
+              { $lte: ["$mois", 6] },
+              2,
+              {
+                $cond: [
+                  { $lte: ["$mois", 9] },
+                  3,
+                  4
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      total_ttc: 1
+    }
+  },
+  {
+    $group: {
+      _id: { annee: "$annee", trimestre: "$trimestre" },
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $sort: { "_id.annee": 1, "_id.trimestre": 1 }
+  }
+])
+```
+
+**2. Nombre de commandes par jour de la semaine**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      jour_semaine: { $dayOfWeek: "$date_commande" }
+    }
+  },
+  {
+    $group: {
+      _id: "$jour_semaine",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+```
+
+**3. Jour de la semaine le plus rentable**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      jour_semaine: { $dayOfWeek: "$date_commande" },
+      total_ttc: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$jour_semaine",
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+```
+
 ### Exercice 11.3 : Découpage de champs
 
 **Objectif** : Extraire des informations depuis des champs complexes
+
+#### Questions
 
 1. Calculer le nombre de commandes par initiale du nom de client (première lettre du nom)
 
 2. Grouper les produits par première lettre du nom
 
+#### Solutions
+
+**1. Nombre de commandes par initiale du nom de client**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $project: {
+      initiale: { $substr: ["$client_info.nom", 0, 1] }
+    }
+  },
+  {
+    $group: {
+      _id: "$initiale",
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+```
+
+**2. Produits groupés par première lettre du nom**
+
+```javascript
+db.produits.aggregate([
+  {
+    $project: {
+      initiale: { $substr: ["$nom", 0, 1] },
+      nom: 1,
+      prix: 1,
+      categorie: 1
+    }
+  },
+  {
+    $group: {
+      _id: "$initiale",
+      produits: { $push: { nom: "$nom", prix: "$prix", categorie: "$categorie" } },
+      nb_produits: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+```
+
 ### Exercice 11.4 : Analyses multi-dimensionnelles
 
 **Objectif** : Combiner plusieurs dimensions
+
+#### Questions
 
 1. Calculer le chiffre d'affaires par :
    - Catégorie de produit
@@ -2095,6 +2320,85 @@ print("Temps avec index: " + tempsAvecIndex + "ms")
    - Statut de commande
    - Mode de livraison
 
+#### Solutions
+
+**1. CA par catégorie, ville et mois**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $unwind: "$produits"
+  },
+  {
+    $lookup: {
+      from: "produits",
+      localField: "produits.produit_id",
+      foreignField: "_id",
+      as: "produit_info"
+    }
+  },
+  {
+    $unwind: "$produit_info"
+  },
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $project: {
+      categorie: "$produit_info.categorie",
+      ville: "$client_info.adresse.ville",
+      annee: { $year: "$date_commande" },
+      mois: { $month: "$date_commande" },
+      montant: {
+        $multiply: ["$produits.quantite", "$produits.prix_unitaire"]
+      }
+    }
+  },
+  {
+    $group: {
+      _id: {
+        categorie: "$categorie",
+        ville: "$ville",
+        annee: "$annee",
+        mois: "$mois"
+      },
+      ca_total: { $sum: "$montant" }
+    }
+  },
+  {
+    $sort: { "_id.annee": 1, "_id.mois": 1, ca_total: -1 }
+  }
+])
+```
+
+**2. Panier moyen par statut et mode de livraison**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: {
+        statut: "$statut",
+        mode_livraison: "$mode_livraison"
+      },
+      panier_moyen: { $avg: "$total_ttc" },
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { panier_moyen: -1 }
+  }
+])
+```
+
 ---
 
 ## Partie 12 : Projet final - Dashboard analytique
@@ -2103,50 +2407,640 @@ print("Temps avec index: " + tempsAvecIndex + "ms")
 
 Créer un ensemble de requêtes d'agrégation qui simulent un dashboard analytique pour l'e-commerce.
 
-### Exercices à réaliser
+### Solutions
 
-1. **Vue d'ensemble des ventes**
-   - CA total (HT et TTC)
-   - Nombre total de commandes
-   - Panier moyen
-   - Nombre de clients actifs
+#### 1. Vue d'ensemble des ventes
 
-2. **Top produits**
-   - Les 5 produits les plus vendus (quantité)
-   - Les 5 produits avec le plus de CA
-   - Les produits les mieux notés (note moyenne >= 4.5)
+**CA total (HT et TTC), nombre de commandes, panier moyen, clients actifs**
 
-3. **Analyse géographique**
-   - CA par ville
-   - Nombre de clients par ville
-   - Top 3 des villes les plus rentables
+```javascript
+// Vue d'ensemble complète
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: null,
+      ca_total_ht: { $sum: "$total_ht" },
+      ca_total_ttc: { $sum: "$total_ttc" },
+      nb_commandes: { $sum: 1 },
+      panier_moyen: { $avg: "$total_ttc" }
+    }
+  },
+  {
+    $lookup: {
+      from: "clients",
+      pipeline: [
+        { $match: { statut: "actif" } },
+        { $count: "total" }
+      ],
+      as: "clients_actifs_info"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ca_total_ht: { $round: ["$ca_total_ht", 2] },
+      ca_total_ttc: { $round: ["$ca_total_ttc", 2] },
+      nb_commandes: 1,
+      panier_moyen: { $round: ["$panier_moyen", 2] },
+      nb_clients_actifs: {
+        $ifNull: [
+          { $arrayElemAt: ["$clients_actifs_info.total", 0] },
+          0
+        ]
+      }
+    }
+  }
+])
 
-4. **Analyse temporelle**
-   - CA par mois
-   - Évolution du nombre de commandes par mois
-   - Mois le plus rentable
+// Alternative : requête séparée pour les clients actifs
+db.clients.countDocuments({ statut: "actif" })
+```
 
-5. **Analyse clients**
-   - Top 5 des clients par CA
-   - Clients avec le plus de commandes
-   - Ville avec le plus de clients
+**Commentaire** : Cette requête calcule les indicateurs clés de performance : chiffre d'affaires total (HT et TTC), nombre total de commandes, panier moyen et nombre de clients actifs.
 
-6. **Analyse produits**
-   - Produits en rupture de stock
-   - Produits par catégorie avec stock moyen
-   - Fabricants les plus représentés
+#### 2. Top produits
 
-7. **Indicateurs de performance**
-   - Taux de conversion (commandes / clients)
-   - Valeur moyenne par produit vendu
-   - Répartition des commandes par statut
+**Les 5 produits les plus vendus (quantité)**
 
-### Livrables attendus
+```javascript
+db.commandes.aggregate([
+  {
+    $unwind: "$produits"
+  },
+  {
+    $group: {
+      _id: "$produits.produit_id",
+      quantite_totale: { $sum: "$produits.quantite" }
+    }
+  },
+  {
+    $lookup: {
+      from: "produits",
+      localField: "_id",
+      foreignField: "_id",
+      as: "produit_info"
+    }
+  },
+  {
+    $unwind: "$produit_info"
+  },
+  {
+    $project: {
+      _id: 0,
+      produit_id: "$_id",
+      nom: "$produit_info.nom",
+      quantite_totale: 1
+    }
+  },
+  {
+    $sort: { quantite_totale: -1 }
+  },
+  {
+    $limit: 5
+  }
+])
+```
 
-Pour chaque analyse, fournir :
-- La requête MongoDB complète
-- Un commentaire expliquant ce que fait la requête
-- Les résultats obtenus (ou un exemple de résultats)
+**Les 5 produits avec le plus de CA**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $unwind: "$produits"
+  },
+  {
+    $group: {
+      _id: "$produits.produit_id",
+      ca_total: {
+        $sum: {
+          $multiply: ["$produits.quantite", "$produits.prix_unitaire"]
+        }
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "produits",
+      localField: "_id",
+      foreignField: "_id",
+      as: "produit_info"
+    }
+  },
+  {
+    $unwind: "$produit_info"
+  },
+  {
+    $project: {
+      _id: 0,
+      produit_id: "$_id",
+      nom: "$produit_info.nom",
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
+**Les produits les mieux notés (note moyenne >= 4.5)**
+
+```javascript
+db.produits.find(
+  { note_moyenne: { $gte: 4.5 } },
+  { nom: 1, note_moyenne: 1, prix: 1, categorie: 1, _id: 0 }
+).sort({ note_moyenne: -1 })
+```
+
+**Commentaire** : Ces requêtes identifient les produits les plus performants selon différents critères : volume de ventes, chiffre d'affaires généré, et satisfaction client.
+
+#### 3. Analyse géographique
+
+**CA par ville**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $group: {
+      _id: "$client_info.adresse.ville",
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ville: "$_id",
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  }
+])
+```
+
+**Nombre de clients par ville**
+
+```javascript
+db.clients.aggregate([
+  {
+    $group: {
+      _id: "$adresse.ville",
+      nb_clients: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ville: "$_id",
+      nb_clients: 1
+    }
+  },
+  {
+    $sort: { nb_clients: -1 }
+  }
+])
+```
+
+**Top 3 des villes les plus rentables**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $group: {
+      _id: "$client_info.adresse.ville",
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ville: "$_id",
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  },
+  {
+    $limit: 3
+  }
+])
+```
+
+**Commentaire** : Ces analyses permettent d'identifier les zones géographiques les plus performantes en termes de chiffre d'affaires et de concentration de clients.
+
+#### 4. Analyse temporelle
+
+**CA par mois**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      annee: { $year: "$date_commande" },
+      mois: { $month: "$date_commande" },
+      total_ttc: 1
+    }
+  },
+  {
+    $group: {
+      _id: { annee: "$annee", mois: "$mois" },
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      periode: {
+        $concat: [
+          { $toString: "$_id.annee" },
+          "-",
+          { $toString: "$_id.mois" }
+        ]
+      },
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { periode: 1 }
+  }
+])
+```
+
+**Évolution du nombre de commandes par mois**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      annee: { $year: "$date_commande" },
+      mois: { $month: "$date_commande" }
+    }
+  },
+  {
+    $group: {
+      _id: { annee: "$annee", mois: "$mois" },
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      periode: {
+        $concat: [
+          { $toString: "$_id.annee" },
+          "-",
+          { $toString: "$_id.mois" }
+        ]
+      },
+      nb_commandes: 1
+    }
+  },
+  {
+    $sort: { periode: 1 }
+  }
+])
+```
+
+**Mois le plus rentable**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $project: {
+      annee: { $year: "$date_commande" },
+      mois: { $month: "$date_commande" },
+      total_ttc: 1
+    }
+  },
+  {
+    $group: {
+      _id: { annee: "$annee", mois: "$mois" },
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      periode: {
+        $concat: [
+          { $toString: "$_id.annee" },
+          "-",
+          { $toString: "$_id.mois" }
+        ]
+      },
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+```
+
+**Commentaire** : Ces analyses temporelles permettent de suivre l'évolution des ventes et d'identifier les périodes les plus rentables.
+
+#### 5. Analyse clients
+
+**Top 5 des clients par CA**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $group: {
+      _id: "$client_id",
+      nom: { $first: "$client_info.nom" },
+      prenom: { $first: "$client_info.prenom" },
+      ville: { $first: "$client_info.adresse.ville" },
+      ca_total: { $sum: "$total_ttc" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      client_id: "$_id",
+      nom: 1,
+      prenom: 1,
+      ville: 1,
+      ca_total: { $round: ["$ca_total", 2] }
+    }
+  },
+  {
+    $sort: { ca_total: -1 }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
+**Clients avec le plus de commandes**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $lookup: {
+      from: "clients",
+      localField: "client_id",
+      foreignField: "_id",
+      as: "client_info"
+    }
+  },
+  {
+    $unwind: "$client_info"
+  },
+  {
+    $group: {
+      _id: "$client_id",
+      nom: { $first: "$client_info.nom" },
+      prenom: { $first: "$client_info.prenom" },
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      client_id: "$_id",
+      nom: 1,
+      prenom: 1,
+      nb_commandes: 1
+    }
+  },
+  {
+    $sort: { nb_commandes: -1 }
+  }
+])
+```
+
+**Ville avec le plus de clients**
+
+```javascript
+db.clients.aggregate([
+  {
+    $group: {
+      _id: "$adresse.ville",
+      nb_clients: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ville: "$_id",
+      nb_clients: 1
+    }
+  },
+  {
+    $sort: { nb_clients: -1 }
+  },
+  {
+    $limit: 1
+  }
+])
+```
+
+**Commentaire** : Ces analyses permettent d'identifier les clients les plus précieux et les zones géographiques avec la plus forte concentration de clients.
+
+#### 6. Analyse produits
+
+**Produits en rupture de stock**
+
+```javascript
+db.produits.find(
+  { stock: 0 },
+  { nom: 1, categorie: 1, prix: 1, _id: 0 }
+).sort({ nom: 1 })
+```
+
+**Produits par catégorie avec stock moyen**
+
+```javascript
+db.produits.aggregate([
+  {
+    $group: {
+      _id: "$categorie",
+      stock_moyen: { $avg: "$stock" },
+      stock_total: { $sum: "$stock" },
+      nb_produits: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      categorie: "$_id",
+      stock_moyen: { $round: ["$stock_moyen", 2] },
+      stock_total: 1,
+      nb_produits: 1
+    }
+  },
+  {
+    $sort: { categorie: 1 }
+  }
+])
+```
+
+**Fabricants les plus représentés**
+
+```javascript
+db.produits.aggregate([
+  {
+    $group: {
+      _id: "$fabricant",
+      nb_produits: { $sum: 1 },
+      stock_total: { $sum: "$stock" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      fabricant: "$_id",
+      nb_produits: 1,
+      stock_total: 1
+    }
+  },
+  {
+    $sort: { nb_produits: -1 }
+  }
+])
+```
+
+**Commentaire** : Ces analyses permettent de gérer efficacement le stock et d'identifier les fabricants les plus représentés dans le catalogue.
+
+#### 7. Indicateurs de performance
+
+**Taux de conversion (commandes / clients)**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: null,
+      nb_commandes: { $sum: 1 },
+      nb_clients_uniques: { $addToSet: "$client_id" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      nb_commandes: 1,
+      nb_clients_uniques: { $size: "$nb_clients_uniques" },
+      taux_conversion: {
+        $round: [
+          {
+            $divide: [
+              "$nb_commandes",
+              { $size: "$nb_clients_uniques" }
+            ]
+          },
+          2
+        ]
+      }
+    }
+  }
+])
+```
+
+**Valeur moyenne par produit vendu**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $unwind: "$produits"
+  },
+  {
+    $group: {
+      _id: null,
+      valeur_moyenne: {
+        $avg: {
+          $multiply: ["$produits.quantite", "$produits.prix_unitaire"]
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      valeur_moyenne: { $round: ["$valeur_moyenne", 2] }
+    }
+  }
+])
+```
+
+**Répartition des commandes par statut**
+
+```javascript
+db.commandes.aggregate([
+  {
+    $group: {
+      _id: "$statut",
+      nb_commandes: { $sum: 1 },
+      pourcentage: {
+        $multiply: [
+          {
+            $divide: [
+              { $sum: 1 },
+              { $sum: { $sum: 1 } }
+            ]
+          },
+          100
+        ]
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      statut: "$_id",
+      nb_commandes: 1,
+      pourcentage: { $round: ["$pourcentage", 2] }
+    }
+  },
+  {
+    $sort: { nb_commandes: -1 }
+  }
+])
+```
+
+**Commentaire** : Ces indicateurs de performance permettent d'évaluer l'efficacité globale de l'activité e-commerce et d'identifier les points d'amélioration.
 
 ---
 
