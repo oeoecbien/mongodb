@@ -2286,7 +2286,7 @@ db.commandes.aggregate([
 db.produits.aggregate([
   {
     $project: {
-      initiale: { $substr: ["$nom", 0, 1] },
+      initiale: { $substrCP: ["$nom", 0, 1] },
       nom: 1,
       prix: 1,
       categorie: 1
@@ -3012,31 +3012,31 @@ db.commandes.aggregate([
   {
     $group: {
       _id: "$statut",
-      nb_commandes: { $sum: 1 },
-      pourcentage: {
-        $multiply: [
-          {
-            $divide: [
-              { $sum: 1 },
-              { $sum: { $sum: 1 } }
-            ]
-          },
-          100
+      nb_commandes: { $sum: 1 }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      total: { $sum: "$nb_commandes" },
+      data: { $push: { statut: "$_id", nb_commandes: "$nb_commandes" } }
+    }
+  },
+  { $unwind: "$data" },
+  {
+    $project: {
+      _id: 0,
+      statut: "$data.statut",
+      nb_commandes: "$data.nb_commandes",
+      pourcentage: { 
+        $round: [
+          { $multiply: [{ $divide: ["$data.nb_commandes", "$total"] }, 100] },
+          2
         ]
       }
     }
   },
-  {
-    $project: {
-      _id: 0,
-      statut: "$_id",
-      nb_commandes: 1,
-      pourcentage: { $round: ["$pourcentage", 2] }
-    }
-  },
-  {
-    $sort: { nb_commandes: -1 }
-  }
+  { $sort: { nb_commandes: -1 } }
 ])
 ```
 
