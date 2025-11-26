@@ -609,13 +609,16 @@ db.produits.aggregate([
 
 1. Calculer la note moyenne réelle à partir du tableau `notes_clients` (tous produits confondus)
 
+```javascript
 db.produits.aggregate([
   { $unwind: "$notes_clients" },
   { $group: { _id: null, noteMoyenneGlobale: { $avg: "$notes_clients" } } }
 ])
+```
 
 2. Calculer la note moyenne par produit à partir du tableau `notes_clients`
 
+```javascript
 db.produits.aggregate([
   { $unwind: "$notes_clients" },
   { 
@@ -626,29 +629,36 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 3. Afficher tous les tags distincts utilisés dans les produits
 
+```javascript
 db.produits.aggregate([
   { $unwind: "$tags" },
   { $group: { _id: "$tags" } }
 ])
+```
 
 ou triés : 
 
+```javascript
 db.produits.aggregate([
   { $unwind: "$tags" },
   { $group: { _id: "$tags" } },
   { $sort: { _id: 1 } }
 ])
+```
 
 4. Compter le nombre de produits par tag
 
+```javascript
 db.produits.aggregate([
   { $unwind: "$tags" },
   { $group: { _id: "$tags", nombreProduits: { $sum: 1 } } },
   { $sort: { nombreProduits: -1 } }
 ])
+```
 
 ### Exercice 3.3 : Transformation avec `$project`
 
@@ -656,6 +666,7 @@ db.produits.aggregate([
 
 1. Créer une vue avec : nom, catégorie, prix TTC (prix * 1.20), et stock
 
+```javascript
 db.produits.aggregate([
   { 
     $project: {
@@ -667,9 +678,11 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 2. Calculer le nombre de jours depuis l'ajout du produit (utiliser `$subtract` avec la date actuelle)
 
+```javascript
 db.produits.aggregate([
   {
     $project: {
@@ -684,9 +697,11 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 3. Créer un champ `prix_categorie` qui combine le prix et la catégorie (ex: "1299.99 - Informatique")
 
+```javascript
 db.produits.aggregate([
   {
     $project: {
@@ -703,6 +718,7 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 ### Exercice 3.4 : Groupements composés
 
@@ -710,6 +726,7 @@ db.produits.aggregate([
 
 1. Calculer le prix moyen par catégorie et par fabricant
 
+```javascript
 db.produits.aggregate([
   { 
     $group: {
@@ -718,9 +735,11 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 2. Compter le nombre de produits par catégorie et par statut de disponibilité
 
+```javascript
 db.produits.aggregate([
   {
     $group: {
@@ -729,6 +748,7 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 ### Exercice 3.5 : Expressions conditionnelles
 
@@ -739,6 +759,7 @@ db.produits.aggregate([
    - "Faible" si stock < 10
    - "Normal" sinon
 
+```javascript
 db.produits.aggregate([
   {
     $project: {
@@ -760,12 +781,14 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 2. Calculer un champ `prix_categorie` :
    - "Premium" si prix >= 1000
    - "Moyen" si prix >= 500
    - "Économique" sinon
 
+```javascript
 db.produits.aggregate([
   {
     $project: {
@@ -787,6 +810,7 @@ db.produits.aggregate([
     }
   }
 ])
+```
 
 ---
 
