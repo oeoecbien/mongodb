@@ -1,0 +1,281 @@
+{
+  explainVersion: '2',
+  queryPlanner: {
+    namespace: 'timeseries_td.system.buckets.monitoring',
+    parsedQuery: {},
+    indexFilterSet: false,
+    queryHash: 'B3956D95',
+    planCacheShapeHash: 'B3956D95',
+    planCacheKey: 'E66D7B71',
+    optimizationTimeMillis: 0,
+    optimizedPipeline: true,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      queryPlan: {
+        stage: 'GROUP',
+        planNodeId: 3,
+        inputStage: {
+          stage: 'UNPACK_TS_BUCKET',
+          planNodeId: 2,
+          include: [
+            'cpu_usage_percent',
+            'metadata'
+          ],
+          computedMetaProjFields: [],
+          includeMeta: true,
+          eventFilter: {},
+          wholeBucketFilter: {},
+          inputStage: {
+            stage: 'COLLSCAN',
+            planNodeId: 1,
+            filter: {},
+            direction: 'forward'
+          }
+        }
+      },
+      slotBasedPlan: {
+        slots: '$$RESULT=s22 env: { s6 = Nothing (nothing) }',
+        stages: '[3] project [s22 = newBsonObj("_id", s18, "avg_cpu", s21)] \n' +
+          '[3] project [s21 = \n' +
+          '    if (s20 == 0ll) \n' +
+          '    then null \n' +
+          '    else (doubleDoubleSumFinalize(s19) / s20) \n' +
+          '] \n' +
+          '[3] block_to_row blocks[s13, s16, s17] row[s18, s19, s20] s5 \n' +
+          '[3] block_group bitset = s5 [s13] [s16 = valueBlockAggDoubleDoubleSum(s10, s8), s17 = valueBlockAggSum(s10, s9)] [s16 = aggDoubleDoubleSum(s8), s17 = sum(s9)] [s14, s15] [s8, s9] spillSlots[s11, s12] mergingExprs[aggMergeDoubleDoubleSums(s11), sum(s12)] \n' +
+          '[3] project [s13 = (s7 ?: null), s14 = cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4), s15 = \n' +
+          '    let [\n' +
+          '        l9.0 = valueBlockLogicalOr(valueBlockFillEmpty(valueBlockTypeMatch(cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4), 1088), true), valueBlockLogicalNot(valueBlockTypeMatch(cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4), 851970))) \n' +
+          '    ] \n' +
+          '    in valueBlockCombine(valueBlockNewFill(0ll, valueBlockSize(l9.0)), valueBlockNewFill(1ll, valueBlockSize(valueBlockLogicalNot(l9.0))), l9.0) \n' +
+          '] \n' +
+          '[3] project [s7 = traverseP(s1, lambda(l2.0) { getField(move(l2.0), "sensor_id") }, 1)] \n' +
+          '[2] ts_bucket_to_cellblock s2 pathReqs[s4 = ProjectPath(Get(cpu_usage_percent)/Id)] bitmap = s5 \n' +
+          '[1] scan s2 s3 none none none none none none lowPriority [s1 = meta] @"a47ab112-d330-4dc2-a322-007c7d8bcb9a" true false '
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 5,
+    executionTimeMillis: 6,
+    totalKeysExamined: 0,
+    totalDocsExamined: 2150,
+    executionStages: {
+      stage: 'project',
+      planNodeId: 3,
+      nReturned: 5,
+      executionTimeMillisEstimate: 0,
+      opens: 1,
+      closes: 1,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      projections: {
+        '22': 'newBsonObj("_id", s18, "avg_cpu", s21) '
+      },
+      inputStage: {
+        stage: 'project',
+        planNodeId: 3,
+        nReturned: 5,
+        executionTimeMillisEstimate: 0,
+        opens: 1,
+        closes: 1,
+        saveState: 0,
+        restoreState: 0,
+        isEOF: 1,
+        projections: {
+          '21': '\n' +
+            '    if (s20 == 0ll) \n' +
+            '    then null \n' +
+            '    else (doubleDoubleSumFinalize(s19) / s20) \n'
+        },
+        inputStage: {
+          stage: 'block_to_row',
+          planNodeId: 3,
+          nReturned: 5,
+          executionTimeMillisEstimate: 0,
+          opens: 1,
+          closes: 1,
+          saveState: 0,
+          restoreState: 0,
+          isEOF: 1,
+          inputStage: {
+            stage: 'block_group',
+            planNodeId: 3,
+            nReturned: 1,
+            executionTimeMillisEstimate: 0,
+            opens: 1,
+            closes: 1,
+            saveState: 0,
+            restoreState: 0,
+            isEOF: 1,
+            groupBySlots: [
+              13
+            ],
+            blockExpressions: {
+              '16': 'valueBlockAggDoubleDoubleSum(s10, s8) ',
+              '17': 'valueBlockAggSum(s10, s9) '
+            },
+            rowExpressions: {
+              '16': 'aggDoubleDoubleSum(s8) ',
+              '17': 'sum(s9) '
+            },
+            initExprs: {
+              '16': null,
+              '17': null
+            },
+            blockDataInSlots: [
+              14,
+              15
+            ],
+            accumulatorDataSlots: [
+              8,
+              9
+            ],
+            mergingExprs: {
+              '11': 'aggMergeDoubleDoubleSums(s11) ',
+              '12': 'sum(s12) '
+            },
+            usedDisk: false,
+            spills: 0,
+            spilledBytes: 0,
+            spilledRecords: 0,
+            spilledDataStorageSize: 0,
+            blockAccumulations: 2150,
+            blockAccumulatorTotalCalls: 2150,
+            elementWiseAccumulations: 0,
+            inputStage: {
+              stage: 'project',
+              planNodeId: 3,
+              nReturned: 2150,
+              executionTimeMillisEstimate: 0,
+              opens: 1,
+              closes: 2,
+              saveState: 0,
+              restoreState: 0,
+              isEOF: 1,
+              projections: {
+                '13': '(s7 ?: null) ',
+                '14': 'cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4) ',
+                '15': '\n' +
+                  '    let [\n' +
+                  '        l9.0 = valueBlockLogicalOr(valueBlockFillEmpty(valueBlockTypeMatch(cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4), 1088), true), valueBlockLogicalNot(valueBlockTypeMatch(cellFoldValues_P(cellBlockGetFlatValuesBlock(s4), s4), 851970))) \n' +
+                  '    ] \n' +
+                  '    in valueBlockCombine(valueBlockNewFill(0ll, valueBlockSize(l9.0)), valueBlockNewFill(1ll, valueBlockSize(valueBlockLogicalNot(l9.0))), l9.0) \n'
+              },
+              inputStage: {
+                stage: 'project',
+                planNodeId: 3,
+                nReturned: 2150,
+                executionTimeMillisEstimate: 0,
+                opens: 1,
+                closes: 2,
+                saveState: 0,
+                restoreState: 0,
+                isEOF: 1,
+                projections: {
+                  '7': 'traverseP(s1, lambda(l2.0) { getField(move(l2.0), "sensor_id") }, 1) '
+                },
+                inputStage: {
+                  stage: 'ts_bucket_to_cellblock',
+                  planNodeId: 2,
+                  nReturned: 2150,
+                  executionTimeMillisEstimate: 0,
+                  opens: 1,
+                  closes: 2,
+                  saveState: 0,
+                  restoreState: 0,
+                  isEOF: 1,
+                  numCellBlocksProduced: 2150,
+                  numStorageBlocks: 2150,
+                  numStorageBlocksDecompressed: 2150,
+                  inputStage: {
+                    stage: 'scan',
+                    planNodeId: 1,
+                    nReturned: 2150,
+                    executionTimeMillisEstimate: 0,
+                    opens: 1,
+                    closes: 2,
+                    saveState: 0,
+                    restoreState: 0,
+                    isEOF: 1,
+                    numReads: 2150,
+                    recordSlot: 2,
+                    recordIdSlot: 3,
+                    scanFieldNames: [
+                      'meta'
+                    ],
+                    scanFieldSlots: [
+                      1
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  queryShapeHash: 'B0E9A15806EAB37B4270373103F4F592251AC00CD59167920C38BA21B588BA16',
+  command: {
+    aggregate: 'system.buckets.monitoring',
+    pipeline: [
+      {
+        '$_internalUnpackBucket': {
+          timeField: 'timestamp',
+          metaField: 'metadata',
+          bucketMaxSpanSeconds: 3600,
+          assumeNoMixedSchemaData: true,
+          usesExtendedRange: false,
+          fixedBuckets: false
+        }
+      },
+      {
+        '$group': {
+          _id: '$metadata.sensor_id',
+          avg_cpu: {
+            '$avg': '$cpu_usage_percent'
+          }
+        }
+      }
+    ],
+    cursor: {},
+    collation: {
+      locale: 'simple'
+    }
+  },
+  serverInfo: {
+    host: 'clustermelih-shard-00-02.9zuly.mongodb.net',
+    port: 27017,
+    version: '8.0.16',
+    gitVersion: 'ba70b6a13fda907977110bf46e6c8137f5de48f6'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 16793600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 33554432,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1764238603, i: 9 }),
+    signature: {
+      hash: Binary.createFromBase64('3U5miRWH61ofHXT7SJkCx9Vj4uE=', 0),
+      keyId: 7515465934979465000
+    }
+  },
+  operationTime: Timestamp({ t: 1764238603, i: 9 })
+}
