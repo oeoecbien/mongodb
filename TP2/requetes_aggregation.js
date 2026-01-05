@@ -597,7 +597,7 @@ db.monitoring.aggregate([
             stddev_temp: { $stdDevPop: "$temperature_celsius" }
         }
     }
-])
+]).explain("executionStats")
 
 // ----------------------------------------------------------
 // REQUÊTE 12 : Trafic réseau total par région et par jour
@@ -617,7 +617,7 @@ db.monitoring.aggregate([
         }
     },
     { $sort: { "_id.jour": 1, total_network_bytes: -1 } }
-])
+]).explain("executionStats")
 
 // ----------------------------------------------------------
 // REQUÊTE 13 : Distribution des écritures disque par heure
@@ -634,7 +634,7 @@ db.monitoring.aggregate([
         }
     },
     { $sort: { "_id": 1 } }
-])
+]).explain("executionStats")
 
 // ----------------------------------------------------------
 // REQUÊTE 14 : Statistiques avec $facet (multi-résultats)
@@ -663,7 +663,7 @@ db.monitoring.aggregate([
             ]
         }
     }
-])
+]).explain("executionStats")
 
 // ----------------------------------------------------------
 // REQUÊTE 15 : Rang des serveurs par utilisation RAM
@@ -686,7 +686,7 @@ db.monitoring.aggregate([
             }
         }
     }
-])
+]).explain("executionStats")
 
 
 
